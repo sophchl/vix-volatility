@@ -1,0 +1,31 @@
+%!TEX root = ../Main.tex
+
+\section{Selected models of volatility measurement}
+
+\subsection{Models using historic volatility}
+\begin{itemize}\itemsep0pt
+\item historic volatility: just lagged realized volatility
+\item econometric models: GARCH (as an example for a frequently used one)
+\end{itemize}
+
+\subsection{Implied volatility}
+\subsubsection{Black-and-Scholes implied volatility}
+\begin{itemize}\itemsep0pt
+\item explain basic idea of BS implied volatility
+\item advantages of BS implied volatility: forward-looking nature of option prices
+\item disadvantages of BS implied volatility: joint hypothesis problem due to underlying  pricing assumption (is a joint test of market efficiency and underlying pricing assumption), use only at-the-money options and fail to incorporate information,..
+\end{itemize}
+
+\textcolor{gray}{
+Disadvantages of Black and Scholes: Black and Scholes uses only at-the-money option and thus fails to incorporate information \parencite{jiang2003}.
+Black and Scholes are joint tests of market efficiency and the B-S model, thus studies are subject to model misspecification errors \parencite{jiang2003}.}
+
+\subsubsection{VIX and model-free implied volatility}
+\begin{itemize}\itemsep0pt
+\item explain basic idea of model-free implied volatility
+\item advantages of model-free implied volatility: solved joint hypothesis problem (direct test of market efficiency), can incorporate not only at-the-money options,..
+\item the VIX as the model-free implied volatility estimate from the Cboe 
+\end{itemize}
+
+\textcolor{gray}{
+Primilary described and derived by \citeauthor{britten2000}. Instead of being based on a specific option pricing model, it is derived entirely from no-arbitrage conditions. After that some papers did various corrections, such as \citeauthor{jiang2003} extended the model so that is not derived under diffusion assumptions and generalized it to processes including random jumps. Two advantage of the model-free option implied volatility, are firstly that it has no pricing assumption and thus constitutes a direct test of the option market's informational efficiency, and not a joined test of market efficiency and an assumed option pricing model. Secondly it incorporates information from options across different strike prices. }

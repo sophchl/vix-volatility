@@ -1,0 +1,54 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{mystyle} % mit dieser Zeile werden die Pakete in das Dokument eingelesen, das Dokument mystyle.sty muss dazu im directory vorhanden sein
+
+\newcommand{\Title}{Something about comparing volatility forecasts} 
+\newcommand{\Arbeit}{Humboldt Project}
+\newcommand{\Seminar}{seminar}
+\newcommand{\Name}{Sophia Charlotte Gläser}
+\newcommand{\MatrikelNummer}{15202284}
+\newcommand{\Programme} {Corporate Management and Economics}
+\newcommand{\Date}{31.01.2019}
+\newcommand{\Semester}{Fall Semester 2018}
+\newcommand{\Pruefer}{Prof. Dr. Franziska Peter}
+\newcommand{\Chair}{Chair of Empirical Finance and Econometrics}
+	
+\addbibresource{./bib/bibliography.bib} % das entsprechende File muss ebenfalls im entsprechenden Ordner vorhanden sein
+
+\begin{document}
+
+	\input{tex/front}
+	\newpage
+	
+	\pagenumbering{Roman}
+	\tableofcontents
+	\listoftables
+	\listoffigures
+	
+	\newpage
+	
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	\begin{abstract}
+		\input{tex/abstract}
+	\end{abstract}
+	\newpage
+
+
+	\input{./tex/1_Introduction.tex}
+	\input{./tex/2_Motivation.tex}
+	\input{./tex/3_Literature-Review.tex}
+	\input{./tex/4_Methodology-and-Data.tex}
+	\input{./tex/5_Results.tex}
+	\input{./tex/6_Discussion.tex}
+	 % die entsprechenden Teile müssen ebenfalls im entsprechenden Ordner vorhanden sein. Jeder Teil muss mit dem Magic Comment %!TEX root = ../Main.tex  beginnen
+	
+
+	\newpage
+	\pagenumbering{Roman}
+	\printbibliography
+
+
+\include{eidesstattlich.tex}
+\end{document}

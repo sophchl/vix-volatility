@@ -1,0 +1,69 @@
+\ProvidesPackage{mystyle}
+
+% Design Page
+\usepackage[left=3cm, right=2.5cm,
+top=2.5cm, bottom=2.5cm, footskip = 1.5cm]{geometry} 
+\usepackage[doublespacing]{setspace} % Zeilenabstände regeln
+\usepackage[hidelinks]{hyperref} % keine Einfärbung von Links
+
+% Design Input
+\usepackage[utf8]{inputenc} % Inputencoding und Sonderzeichen
+\usepackage[T1]{fontenc} 
+\usepackage{lmodern} %lädt eine bestimmte Art von Fonts
+\usepackage{microtype} %mehr Einstellungen zur Darstellung von Schriften
+\usepackage{textcomp} %European Computer Modern oder Extended Computer Modern, lädt bestimmte grafische Symbole im Text
+\usepackage{amsmath} % for beautiful math symbols 
+\usepackage{amsthm}
+\usepackage{amsbsy}
+\usepackage{amssymb} 
+
+% Design Tables
+\usepackage{tabulary} % bessere Tabellen (insb. hinsichtlich der Spaltenbreite)
+\usepackage{multirow} % erlaubt Verschmelzung von Zellen in Tabellen
+\usepackage{booktabs} % erlaubt professionellere Tabellen
+\usepackage{rotating} % erlaubt die Rotation von Tabellen innerhalb einer Seite
+
+% Varia 
+\usepackage[all]{nowidow} % to avoid widows and clubs, see also: http://www.tex.ac.uk/FAQ-widows.html
+\usepackage{graphicx} %Um Grafiken einzufügen mit Befehl \includegraphics{Dateiname} Datei muss im selben Ordner abgespeichert sein und Dateiname ohne Endung (.jpg oder .pdf) angeben
+\usepackage{footmisc}
+\usepackage{blindtext}
+\usepackage{xcolor} % nice colors
+
+% Sprachen
+\usepackage[british]{babel} % Spracheinstellung, für deutsch: ngerman, für englisch: british
+\usepackage[autostyle=true, % verwende Spracheinstellungen von babel
+]{csquotes} % komplementäres Paket zu babel; regelt Anführungszeichen.
+		% öffnen mit "` oder \glqq schließen mit "' oder \grqq (einfache Anführungszeichen: \glq und \grq)
+
+
+% die folgenden Zeilen definieren den Stil von Titelelementen neu, so dass der Titel den Anforderungen des Lehrstuhls PuMa entspricht
+% \addtokomafont{author}{\flushleft}
+% \addtokomafont{date}{\flushleft}
+% \addtokomafont{publishers}{\flushleft}
+
+
+% Bibliography
+\usepackage[
+style=authoryear,
+backend=biber,
+citestyle=authoryear-ibid,
+style=authoryear-icomp,
+sortlocale=de_DE,
+url=false, 
+doi=false,
+isbn=false,
+eprint=false
+]{biblatex}
+% examples can be found here:
+% https://www.sharelatex.com/learn/Biblatex_citation_styles
+% and
+% https://www.sharelatex.com/learn/Biblatex_bibliography_styles
+\DefineBibliographyStrings{ngerman}{andothers = {{et\,al\adddot}},}
+
+\usepackage{hyperxmp}  % Schreibt Eingaben als PDF-Metadaten
+\hypersetup{
+pdfauthor={},
+%pdftitle={},
+%pdfcopyright={}
+}
