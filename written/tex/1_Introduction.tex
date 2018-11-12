@@ -1,15 +1,17 @@
 %!TEX root = ../Main.tex
 
-\section{Introduction: The importance of volatility measurement}
-\subsection{Why volatility matters: Volatility as key input to both risk measures and option pricing models}
-\begin{itemize}\itemsep0pt
-\item key input to risk measures (VaR etc)
-\item key input to pricing derivative securities
-\item financial market stability
-\item Problems: can not be directly observed and thus has to be estimated 
-\end{itemize}
+\section{Introduction: The Importance of Volatility Measurement}
 
-\subsection{Weaknesses of existing models: VIX introduced by CBOE}
+\subsection{Why Volatility matters: Volatility as Key Input to Option Pricing Models and Risk Measures}
+Characteristics of asset returns are of high interest for the financial sector. They are for example key input to the pricing of financial instruments like derivatives, or to risk measures, such as the value-at-Risk. Moreover they give information on the risk-return trade-off, which is a central question in portfolio allocation and managerial decision making. A crucial characteristic of asset returns is it's volatility, being the most dominant time-varying distribution characteristic. \parencite{andersen2018}.\\
+Volatility ``seeks to capture the strength of the (unexpected) return variation over a given period of time'' \parencite[p.7]{andersen2001}\\
+As volatility is not directly observable, it has to be estimated. During the last years, considerable research has been devoted to the question, how volatility can be measured or estimated.\\
+The prominent approaches can be summarized in time series based models using historic volatility and implied measures using option prices. In the recent years, Black-and-Scholes implied volatility measurement gained popularity. This approach uses the forward-looking nature of option prices. Options are contracts, that give the holder the right to either buy (call option), or sell (put option), an underlying asset, at a specified date in the future for a certain price \parencite{hull2006}. Assuming rational agents/expectation, the market uses all available information to form it's expectation about future price movements and thus about volatility. Assuming furthermore that the market is efficient (price reflect all available information), the market's estimate of future volatility  \parencite{christensen2002}. Due to this forward looking component of option contracts, option prices indirectly contain the market participants' expectations of the underlying asset's future movements. A widely used model to price this option contracts is the Black-and-Scholes-Merton model, which used the option's volatility as key input factor. By using observed option prices as the input and solving for volatility, it is possible to obtain a volatility measure that is widely believed to be ``informationally superior to the historic volatiltiy of the underlying asset'' \parencite[p.1305]{jiang2003}.\\
+Early studies found implied volatility to be a biased forecast of realized volatility, not containing significantly more information than historic volatility. More recent studies however presented evidence that there is important information contained in option prices, that adds to the efficiency of volatility forecasting when implied volatility is included \parencite{jiang2003}. A reason for this discrepancy in results could be that early studies did not consider several various data and methodological problems, such as long enough time series, a possible regime shift around the crash in 1987 and the use of non-overlapping samples \parencite{jiang2003}. For example Christensen .. showed, that .. . All in all \citeauthor{jiang2003} summarize, that collectively ``these studies present evidence that implied volatility a more efficient forecast for future volatility than historic volatility'' (p.1306).
+
+\subsection{Weaknesses of Existing Models: VIX Introduced by CBOE}
+Even though BS implied volatility is found to be the overall more efficient forecast of realized volatility compared to historic volatility \parencite{jiang2003}, the BS implied volatility has some specification problems. Firstly, BS implied volatility focuses on at-the-money options. As at-the-money options are the once most actively traded and thus the most liquid ones, this is certainly a good starting point. However this focus fails to include information contained in other options. Moreover, volatility estimation with the BS model, include the same assumptions as are made in the BS model. Thus test based on the BS equation are actually joined tests of market efficiency and the BS model, and therefore suffer from a model misspecification error \parencite{jiang2003}.
+
 \begin{itemize}\itemsep0pt
 \item power of volatility models lies in out-of-sample forecasting power
 \item so far BS implied volatility models had the best out of sampling forecasting power, but they have several problems (most importantly joint hypothesis problem) 
@@ -19,3 +21,5 @@
 Volatility is for example both a key input factor to risk measures (such as Value-at-risk), or pricing of derivative securities, which both again are crucial for financial decision making. As volatility can not be observed as directly as price can, it has to be both estimated and forecasted. There are multiple ways to forecast volatility. The strenght of a volatility model however lies in it's out-of-sample forecasting power \parencite{poon2003}. \\
 Volatility measures play an important role for financial market stability.\\
 Stylized facts of financial market data suggests that return distributions are not i.i.d., meaning that the variance of returns over a long horizon can not be derived from a single observed period \parencite{poon2003}. }
+
+
