@@ -41,17 +41,30 @@ head(Vix1)
 tail(Vix2)
 Vix <- rbind(Vix1,Vix2) # combine the vix datasets to one big one
 df_temp <- left_join(Vol, Vix, by = "Date") %>% as.data.frame() # attach the Vix dataset to the Vol -> drop the Vix which have no Vol associated
-df <- as.xts(df_temp[,-1], order.by=df_temp[,1]) # turn into xts object, remove first column with obersvation number
-df_ts <- ts(df_temp, freq = 365) # second version: turn into ts object
+Df <- as.xts(df_temp[,-1], order.by=df_temp[,1]) # turn into xts object, remove first column with obersvation number
+Df_ts <- ts(df_temp, freq = 365) # second version: turn into ts object
 rm(df_temp)
 
-## observe data -------------------------------
+## plot data -------------------------------
 
 par(mfrow = c(2,1))
 plot(Df$VIX.Close, grid.col = NA, main = "Daily VIX")
 plot(Df$RealizedVariance, grid.col = NA, main = "Daily Realized Variance", yaxis.left = T)
-plot(Df$WeeklyVariance, grid.col = NA, main = "Weekly Realized Variance")
-plot(Df$MonthlyVariance, grid.col = NA, main = "Monthly Realized Variance")
+
+plot_vol <- autoplot(Df$RealizedVariance) +
+  theme_classic() +
+  ggtitle("Daily Realized Variance") +
+  xlab("Year") +
+  ylab("Variance")
+ggsave("Vol.png", plot = last_plot(), path = "written/pictures")
+
+plot_vix <- autoplot(Df$VIX.Close) +
+  theme_classic() +
+  ggtitle("Daily VIX (Close)") +
+  xlab("Year") +
+  ylab("VIX")
+ggsave("VIX.png", plot = last_plot(), path = "written/pictures")
+
 # graphic analysis shows large peak in 2009, otherwise smaller peaks -> linear model good?
 
 ## check for stationarity: decompose time series ----
@@ -83,7 +96,7 @@ summary(lm2)
 # par(mfrow = c(1,2))
 
 # clear environment
-# rm(list=ls())
+rm(list=ls())
 
 # look at ts
 # start(df$RealizedVariance)

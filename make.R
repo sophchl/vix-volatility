@@ -12,18 +12,19 @@ my_plan <- drake_plan(
   width = 7,
 
   # load data
-  Vol_raw = read.csv2(file_in("data-raw/OxfordManRealizedVolatilityIndices0.2.csv", sep = ",", dec = ".", na.strings=c("","NA"))),
+  Vol_raw = read.csv2(file_in("data-raw/OxfordManRealizedVolatilityIndices0.2.csv"), sep = ",", dec = ".", na.strings=c("","NA")),
   Vix1_raw = read_excel(file_in("data-raw/vixarchive.xls")),
-  Vix2_raw = read.csv2(file_in("data-raw/vixcurrent.csv", sep = ",")),
+  Vix2_raw = read.csv2(file_in("data-raw/vixcurrent.csv"), sep = ","),
 
   # clean data
   Vol = Clean_Vol(Vol_raw),
   Vix1 =  Clean_Vix1(Vix1_raw),
   Vix2 = Clean_Vix2(Vix2_raw),
-  Df = Build_df(Vix1, Vix2, Vol)
+  Df = Build_df(Vix1, Vix2, Vol),
 
   # plot data
-
+  plot_var = plot_data1(Df$RealizedVariance, "Realized Variance", "var.png"),
+  plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png")
 
   # save the plot
 
@@ -34,6 +35,7 @@ my_plan <- drake_plan(
 )
 
 make(my_plan)
+vis_drake_graph(drake_config(my_plan))
 readd(df2)
 loadd(df2)
 
@@ -42,3 +44,4 @@ loadd(df2)
 # Umgebung: normal, dass da keine Objekte auftauchen
 # Funktionen: für kleine Funtkionen kann man auch direkt in drake die baseR funktionen schreiben
 # für jeden Rechenschritt braucht es ein object/target (save <- savefunction(file_out))
+# bei file_in/file_out -> klammer nur um den pfad, restlichen input in die äußere klammer
