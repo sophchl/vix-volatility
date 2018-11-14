@@ -2,8 +2,8 @@ Package: VIXVolatility
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Sophia",
+           family = "Glaeser",
            role = c("aut", "cre"),
            email = "first.last@example.com")
 Description: What the package does (one paragraph).
@@ -13,4 +13,9 @@ LazyData: true
 RoxygenNote: 6.1.0
 Imports: 
     tseries,
-    data.table
+    data.table,
+    readxl,
+    lubridate,
+    dplyr,
+    zoo,
+    xts

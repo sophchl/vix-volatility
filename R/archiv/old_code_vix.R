@@ -35,5 +35,14 @@
 #   n<-n+5
 # }
 # rm(n)
+#
+# # # monthly and weekly averages (non-moving)
+# Vol <- Vol %>% group_by (yw = paste(year(Date), week(Date), sep = "")) # add unique week index (temp)
+# Vol <- Vol %>% group_by(ym = paste(year(Date), month(Date), sep = "")) # add unique month index (temp)
+# Vol$yw <- as.numeric(Vol$yw) # turn the unique week index in numeric
+# Vol$ym <- as.numeric(Vol$ym) # turn the unique month index in numeric
+# Vol$WeeklyVariance <- ave(Vol$RealizedVariance, Vol$yw, FUN=function(x) mean (x,na.rm = T)) # create weekly average
+# Vol$MonthlyVariance <- ave(Vol$RealizedVariance, Vol$ym, FUN=function(x) mean (x,na.rm = T)) # create monthly average
+# Vol <- Vol[,-(3:4)] # remove week and month index
 
 
