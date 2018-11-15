@@ -15,7 +15,12 @@
 	
 \addbibresource{./bib/bibliography.bib} % das entsprechende File muss ebenfalls im entsprechenden Ordner vorhanden sein
 
+\makeglossaries
+
 \begin{document}
+
+\newglossaryentry{BS}{name=BS, description={Black-and-Scholes-Merton Model}}
+\newglossaryentry{CBOE}{name=CBOE, description={Chicago Board of Options Exchange}}
 
 	\input{tex/front}
 	\newpage
@@ -24,6 +29,7 @@
 	\tableofcontents
 	\listoftables
 	\listoffigures
+	\printglossaries
 	
 	\newpage
 	
@@ -43,7 +49,6 @@
 	\input{./tex/5_Results.tex}
 	\input{./tex/6_Discussion.tex}
 	 % die entsprechenden Teile müssen ebenfalls im entsprechenden Ordner vorhanden sein. Jeder Teil muss mit dem Magic Comment %!TEX root = ../Main.tex  beginnen
-	
 
 	\newpage
 	\pagenumbering{Roman}
