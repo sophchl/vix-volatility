@@ -7,6 +7,8 @@ library(readxl) # to read excel xls data
 library(dplyr) # e.g. to use join
 library(zoo) # basis of xts
 library(stats) # e.g. for lagging time series
+library(Hmisc) # lag
+# library(quantmod) # e.g. function Next to advance time series
 # library(lattice)
 
 ## load and clean data -------------------------------
@@ -42,7 +44,7 @@ tail(Vix2)
 Vix <- rbind(Vix1,Vix2) # combine the vix datasets to one big one
 df_temp <- left_join(Vol, Vix, by = "Date") %>% as.data.frame() # attach the Vix dataset to the Vol -> drop the Vix which have no Vol associated
 Df <- as.xts(df_temp[,-1], order.by=df_temp[,1]) # turn into xts object, remove first column with obersvation number
-Df_ts <- ts(df_temp, freq = 365) # second version: turn into ts object
+# Df_ts <- ts(df_temp, freq = 365) # second version: turn into ts object
 rm(df_temp)
 
 ## plot data -------------------------------
@@ -56,14 +58,14 @@ plot_vol <- autoplot(Df$RealizedVariance) +
   ggtitle("Daily Realized Variance") +
   xlab("Year") +
   ylab("Variance")
-ggsave("Vol.png", plot = last_plot(), path = "written/pictures")
+# ggsave("Vol.png", plot = last_plot(), path = "written/pictures")
 
 plot_vix <- autoplot(Df$VIX.Close) +
   theme_classic() +
   ggtitle("Daily VIX (Close)") +
   xlab("Year") +
   ylab("VIX")
-ggsave("VIX.png", plot = last_plot(), path = "written/pictures")
+# ggsave("VIX.png", plot = last_plot(), path = "written/pictures")
 
 # graphic analysis shows large peak in 2009, otherwise smaller peaks -> linear model good?
 
@@ -74,15 +76,38 @@ decomposedR <- decompose(Df, type = "mult") # soll Zeitreihe in Trend, Saison un
 
 ## regress data -------------------------------
 
-lm1 <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T))
+## tested 2 Alternatives, both seem to give the same result (positive)
+
+# Alternative 1: RV(t+1) = RV(t) + RV(w, incl.t) + RV(m, incl.t) + VIX(t)
+
+lm1 <- lm(Hmisc::Lag(Df$RealizedVariance, shift=-1) ~ Df$RealizedVariance + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T))
 summary(lm1)
-lm2 <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) + Df$VIX.Close %>% lag(1))
+lm2 <- lm(Hmisc::Lag(Df$RealizedVariance, shift=-1) ~ Df$RealizedVariance + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) + Df$VIX.Close)
 summary(lm2)
 
+# Alternative 2: Rv(t) = RV(t-1) + RV(w, starting t-1) + RV(m, starting t-1) + VIX(t-1)
 
+lm1b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) %>% lag(1))
+summary(lm1b)
+lm2b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) %>% lag(1) + Df$VIX.Close %>% lag(1))
+summary(lm2b)
 
+## testing the lag -> careful, lag vs. Lag (Hmisc)
 
+# rollapply uses the same day (2000-01-07 shows average of 2000-01-07 inclusive)
+test <- Df$RealizedVariance %>% rollapply(width=5,mean,na.rm = T) %>% lag(1)
+test[(1:20),]
+Df$RealizedVariance[(1:5),] %>% sum()/5
 
+# lag in xts shifts each observation one time period ahead, so on 2000-01-04 the observation of 2000-01-03 is shown -> lag(RV,1) = RV(t-1)
+Lag_var <- Hmisc::Lag(Df$RealizedVariance, shift = 1)
+Lead_var <- Hmisc::Lag(Df$RealizedVariance, shift = -1)
+Df$RealizedVariance[1:5,]
+head(Lag_var)
+head(Lead_var)
+tail(lag)
+tail(lead)
+class(Df)
 
 
 ## generic -------
