@@ -36,8 +36,9 @@ my_plan <- drake_plan(
 
 make(my_plan)
 vis_drake_graph(drake_config(my_plan))
-readd(df2)
-loadd(df2)
+readd(Df)
+loadd(Df)
+
 
 ## Merkzettel --------------------------------
 # file_in - Wenn ich Sachen von außerhalb der R umgebung einlese, file_out: wenn ich Sachen abspeichere
