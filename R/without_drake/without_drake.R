@@ -8,6 +8,7 @@ library(dplyr) # e.g. to use join
 library(zoo) # basis of xts
 library(stats) # e.g. for lagging time series
 library(Hmisc) # lag
+library(texreg) # to save regression results
 # library(quantmod) # e.g. function Next to advance time series
 # library(lattice)
 
@@ -92,22 +93,7 @@ summary(lm1b)
 lm2b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) %>% lag(1) + Df$VIX.Close %>% lag(1))
 summary(lm2b)
 
-## testing the lag -> careful, lag vs. Lag (Hmisc)
 
-# rollapply uses the same day (2000-01-07 shows average of 2000-01-07 inclusive)
-test <- Df$RealizedVariance %>% rollapply(width=5,mean,na.rm = T) %>% lag(1)
-test[(1:20),]
-Df$RealizedVariance[(1:5),] %>% sum()/5
-
-# lag in xts shifts each observation one time period ahead, so on 2000-01-04 the observation of 2000-01-03 is shown -> lag(RV,1) = RV(t-1)
-Lag_var <- Hmisc::Lag(Df$RealizedVariance, shift = 1)
-Lead_var <- Hmisc::Lag(Df$RealizedVariance, shift = -1)
-Df$RealizedVariance[1:5,]
-head(Lag_var)
-head(Lead_var)
-tail(lag)
-tail(lead)
-class(Df)
 
 
 ## generic -------
@@ -121,7 +107,7 @@ class(Df)
 # par(mfrow = c(1,2))
 
 # clear environment
-rm(list=ls())
+# rm(list=ls())
 
 # look at ts
 # start(df$RealizedVariance)

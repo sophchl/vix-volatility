@@ -2,6 +2,8 @@ library(usethis)
 library(devtools)
 library(drake)
 library(tidyverse)
+library(readxl)
+library(xts)
 library(VIXVolatility)
 pkgconfig::set_config("drake::strings_in_dots" = "literals")
 
@@ -17,20 +19,20 @@ my_plan <- drake_plan(
   Vix2_raw = read.csv2(file_in("data-raw/vixcurrent.csv"), sep = ","),
 
   # clean data
-  Vol = Clean_Vol(Vol_raw),
+  Vol = Clean_Vol2(Vol_raw),
   Vix1 =  Clean_Vix1(Vix1_raw),
   Vix2 = Clean_Vix2(Vix2_raw),
   Df = Build_df(Vix1, Vix2, Vol),
 
-  # plot data
+  # plot data and save plot
   plot_var = plot_data1(Df$RealizedVariance, "Realized Variance", "var.png"),
-  plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png")
+  plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
 
-  # save the plot
+  # regress data and save plot
+  lm1 = regress_data_harvix2(Df, file_out("written/tables/regression_harvix.tex")),
+  lm2 = regress_data_harvixln2(Df, file_out("written/tables/regression_harvixln.tex"))
 
-
-  # regress data
-
+  #
 
 )
 
