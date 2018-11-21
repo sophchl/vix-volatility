@@ -18,4 +18,5 @@ Imports:
     lubridate,
     dplyr,
     zoo,
-    xts
+    xts,
+    texreg
