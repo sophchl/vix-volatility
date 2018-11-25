@@ -42,6 +42,9 @@ readd(Df)
 loadd(Df)
 
 
+summary(Df$RealizedVariance)
+
+
 ## Merkzettel --------------------------------
 # file_in - Wenn ich Sachen von außerhalb der R umgebung einlese, file_out: wenn ich Sachen abspeichere
 # Umgebung: normal, dass da keine Objekte auftauchen
