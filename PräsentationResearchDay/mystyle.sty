@@ -1,0 +1,37 @@
+\ProvidesPackage{mystyle}
+
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+   % bookmarks=true,        % show bookmarks bar?
+    unicode=false,          % non-Latin characters in AcrobatÓ³ bookmarks
+    pdftoolbar=true,        % show Acrobat toolbar?
+    pdfmenubar=true,        % show Acrobat menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=black,        % color of internal links (change box color with linkbordercolor)
+    citecolor=black,        % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=blue           % color of external links
+}
+
+% change the fonts and the theme
+\usefonttheme{structurebold}
+\usetheme{Metropolis} % here you can play around with the themes: https://www.namsu.de/latex/themes/uebersicht_beamer.html, I like: Montpellier, Singapore, Dresden (of course..), Boadilla, Goettingen, Pittsburgh, Szeged 
+
+
+% Get rid of the irritating navigation bar
+\setbeamertemplate{navigation symbols}{}
+
+% page number the slides
+\setbeamertemplate{footline}[frame number]
+
+% Set item type
+\setbeamertemplate{items}[circle]
