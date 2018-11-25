@@ -77,7 +77,7 @@ decomposedR <- decompose(Df, type = "mult") # soll Zeitreihe in Trend, Saison un
 
 ## regress data -------------------------------
 
-## tested 2 Alternatives, both seem to give the same result (positive)
+## tested 2 Alternatives, both seem to give the same result (which is positive as I expected from theory)
 
 # Alternative 1: RV(t+1) = RV(t) + RV(w, incl.t) + RV(m, incl.t) + VIX(t)
 
@@ -92,8 +92,6 @@ lm1b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVar
 summary(lm1b)
 lm2b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) %>% lag(1) + Df$VIX.Close %>% lag(1))
 summary(lm2b)
-
-
 
 
 ## generic -------
