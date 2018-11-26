@@ -41,8 +41,8 @@ plot_data2 <- function(infile){
     scale_color_manual(values = c("#00AFBB", "#E7B800")) +
     labs(y = "VIX (Close)", x = "Year", color = "Legend") +
     theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
-          text = element_text(size = 20), axis.text = element_text(size = 14))
-  ggsave("SPandViX.png", plot = last_plot(), path = "written/pictures")
+          text = element_text(size = 15), axis.text = element_text(size = 15))
+  ggsave("SPandViX.png", plot = last_plot(), width = 16, path = "written/pictures")
 }
 
 plot_data2(Df_frame)

@@ -26,11 +26,15 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{Motivation: Why this project? Why does Volatility matter?}
 	\begin{itemize}
-	\item<1-> Volatility is not the same as risk, but a closely related concept
+	\item<1-> For the stability of the financial system, precise risk measurement is of great importance
 	\begin{itemize}
-	\item<2-> crucial input to risk measures, such as VaR
-	\item<2-> used for pricing of financial instruments, such as derivatives
-	\item<2-> used for risk-return trade-off and therefore management decisions
+	\item<1-> Volatility is closely related to risk 
+	\item<1-> it is crucial input to risk measures, such as the Value at Risk\footnote{The Value at Risk is a quantile of the loss function, used for example by banks to estimate the amount of assets needed to cover possible losses. It estimates which loss is not going to be exceeded in a given time interval, for a given probability}
+	\end{itemize}
+	\item<2-> Moreover volatility is used for..
+	\begin{itemize}
+	\item<2-> .. the pricing of financial instruments, such as derivatives
+	\item<2-> .. the risk-return trade-off and therefore management decisions
 	\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -38,19 +42,11 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{More closely: What exactly is Volatility?}
 	\begin{itemize}
-	\item<1-> Volatility is usually understood as the standard deviation from the expected value 
+	\item<1-> In Finance, we are usually interested in the \textit{conditional} standard deviation from the expected value of the underlying asset return \parencite{tsay2005}
 	\item<1-> What causes asset price movement and thus volatility?
 	\begin{itemize}
-	\item<2-> as Eugene Fama said himself: We do not yet know in detail, how stock marked prices form 
-	\item<2-> Assuming Market efficiency (\citeauthor{fama1970}): Stock prices incorporate available information from the market, because of competition and free entry 
-	\item<2-> $\rightarrow$ Stock prices react to the market 
-	\end{itemize}
-	\end{itemize}
-	
-	\begin{itemize}
-	\item<3-> What is ''normal`` volatility
-	\begin{itemize}
-	\item<4-> annual volatility.. monthly.. daily..
+	\item<2-> Assuming Market efficiency (\citeauthor{fama1970}), stock prices incorporate available information from the market, because of competition and free entry 
+	\item<2-> Assuming furthermore that stock prices follow geometric Brownian motion, we can use e.g. the Black-Scholes model to derive stock prices $\rightarrow$ but it is not that simple
 	\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -58,13 +54,20 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{The Problem: Why is it so hard to measure and forecast volatility?}
 	\begin{itemize}
-	\item<1-> volatility is not directly observable
+	\item<1-> Volatility is not directly observable
 	\begin{itemize}
-	\item<1-> we can estimate it for a given time period, but every period has different information content (intraday, overnight)
+	\item<1-> We can estimate it for a given time period 
+	\item<1-> However, stock volatility consists of intraday and overnight volatility, each containing different information
 	\end{itemize}
-	\item<2-> Joint hypothesis problem
+	%
+	\item<2-> But we observe some characteristics about volatility, and can thus use econometric models, that best ``copy'' these stylized facts
 	\begin{itemize}
-	\item<2-> Market efficiency per se is not testable
+	\item<2-> ..
+	\end{itemize}
+	%
+	\item<3-> Joint hypothesis problem
+	\begin{itemize}
+	\item<3-> Market efficiency per se is not testable
 	\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -72,11 +75,11 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \section{Data}
 
 \begin{frame}
-\frametitle{Volatility of S \& P 500}
-	\begin{itemize}
-	\item sample period: ..
-	\item 
-	\end{itemize}
+\frametitle{Volatility of S\&P 500}
+	\begin{figure}
+	\centering
+	\includegraphics[scale = 0.33]{graphics/SPandViX.png}
+	\end{figure}
 \end{frame}
 
 
@@ -113,6 +116,11 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \section*{Sources}
 \begin{frame}
 \printbibliography
+\end{frame}
+
+\section{Appendix}
+\begin{frame}
+
 \end{frame}
 
 
