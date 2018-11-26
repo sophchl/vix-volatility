@@ -21,14 +21,5 @@ plot_data1 <- function(variable, title, save_name) {
 
 
 
-plot_data2 <- function(variable1, variable2, title, save_name) {
-  plot <- autoplot(variable1, variable2) +
-    theme_classic() +
-    ggtitle(title) +
-    xlab("Year") +
-    ylab(title)
-  return(plot)
-}
-
 
 

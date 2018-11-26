@@ -67,9 +67,10 @@ Clean_Vix2 <- function(infile) {
 #' Clean_SP(SP_raw)
 #'
 Clean_SP <- function(infile) {
-  SP <- infile[,-(3:10)]
+  SP <- infile[,c(1,4)]
+  colnames(SP) <- c("Date", "SP500")
+  SP <- as.data.frame(SP)
   SP[,1] <- as.Date(SP[,1])
-  SP[,2] <- as.numeric(as.character(SP[,2]))
   return(SP)
 }
 

@@ -206,3 +206,7 @@ head(Df_frame)
 class(Df$RealizedVariance)
 class(Df$VIX.Close)
 class(Df$SP500)
+
+ggplot(data = Df_frame, aes(x = Date, y = RealizedVariance)) + geom_line(color = "#00AFBB", size = 1) +
+  theme_minimal()
+

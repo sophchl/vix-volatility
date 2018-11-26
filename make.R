@@ -17,7 +17,7 @@ my_plan <- drake_plan(
   Vol_raw = read.csv2(file_in("data-raw/OxfordManRealizedVolatilityIndices0.2.csv"), sep = ",", dec = ".", na.strings=c("","NA")),
   Vix1_raw = read_excel(file_in("data-raw/vixarchive.xls")),
   Vix2_raw = read.csv2(file_in("data-raw/vixcurrent.csv"), sep = ","),
-  SP_raw = read.csv2(file_in("data-raw/sandp.csv"), sep = ","),
+  SP_raw = read_excel(file_in("data-raw/sandp500.xls"), range = "A767:D8197", col_names = FALSE),
 
   # clean data
   Vol = Clean_Vol2(Vol_raw),
@@ -42,7 +42,7 @@ my_plan <- drake_plan(
 make(my_plan)
 vis_drake_graph(drake_config(my_plan))
 
-# rm(list = ls())
+rm(list = ls())
 
 
 
