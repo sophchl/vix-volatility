@@ -37,7 +37,6 @@ Clean_Vix1 <- function(infile) {
 
 
 
-
 #' Cleans the VIX data with date format D/M/YYYY
 #'
 #' @param infile
@@ -56,5 +55,22 @@ Clean_Vix2 <- function(infile) {
 }
 
 
+
+#' Cleans the S&P500 Data
+#'
+#' @param infile a data.frame
+#'
+#' @return a data.frame with 2 columns: Date and S&P500
+#' @export
+#'
+#' @examples
+#' Clean_SP(SP_raw)
+#'
+Clean_SP <- function(infile) {
+  SP <- infile[,-(3:10)]
+  SP[,1] <- as.Date(SP[,1])
+  SP[,2] <- as.numeric(as.character(SP[,2]))
+  return(SP)
+}
 
 

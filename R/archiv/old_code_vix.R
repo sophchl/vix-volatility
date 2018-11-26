@@ -183,9 +183,26 @@ Lead_var <- Hmisc::Lag(Df$RealizedVariance, shift = -1)
 Df$RealizedVariance[1:5,]
 head(Lag_var)
 head(Lead_var)
-tail(lag)
+
+
+plot_data2(Df$RealizedVariance, Df$VIX.Close, "RV and VIX", "test.png")
+autoplot(Df$RealizedVariance, Df$VIX.Close)
+autoplot(Df$RealizedVariance)
+
+
+
+
+ggplot(Df, aes(x=Year, y=RealizedVariance))
+head(Df)tail(lag)
 tail(lead)
 class(Df)
 
+ggplot(Df_frame, aes(x=Date, y=)) + geom_line() + theme_classic()
 
+head(Df)
 
+head(Df_frame)
+
+class(Df$RealizedVariance)
+class(Df$VIX.Close)
+class(Df$SP500)

@@ -17,12 +17,15 @@ my_plan <- drake_plan(
   Vol_raw = read.csv2(file_in("data-raw/OxfordManRealizedVolatilityIndices0.2.csv"), sep = ",", dec = ".", na.strings=c("","NA")),
   Vix1_raw = read_excel(file_in("data-raw/vixarchive.xls")),
   Vix2_raw = read.csv2(file_in("data-raw/vixcurrent.csv"), sep = ","),
+  SP_raw = read.csv2(file_in("data-raw/sandp.csv"), sep = ","),
 
   # clean data
   Vol = Clean_Vol2(Vol_raw),
   Vix1 =  Clean_Vix1(Vix1_raw),
   Vix2 = Clean_Vix2(Vix2_raw),
-  Df = Build_df(Vix1, Vix2, Vol),
+  SP = Clean_SP(SP_raw),
+  Df_frame = Build_df2(Vix1, Vix2, Vol, SP),
+  Df = Build_df(Vix1, Vix2, Vol, SP),
 
   # plot data and save plot
   plot_var = plot_data1(Df$RealizedVariance, "Realized Variance", "var.png"),
@@ -38,8 +41,9 @@ my_plan <- drake_plan(
 
 make(my_plan)
 vis_drake_graph(drake_config(my_plan))
-readd(Df)
-loadd(Df)
+
+# rm(list = ls())
+
 
 
 ## Merkzettel --------------------------------
