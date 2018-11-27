@@ -30,9 +30,9 @@ my_plan <- drake_plan(
   # plot data and save plot
   plot_var = plot_data1(Df$RealizedVariance, "Realized Variance", "var.png"),
   plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
-  plot_sp_and_vix = plot_data2(Df_frame),
-  plot_sp_and_vol_and_vix = plot_data3(Df_frame),
-  plot_vol_and_vix = plot_data4(Df_frame),
+  plot_sp_and_vix = plot_data2(Df_frame, "SPandViX.png"),
+  plot_sp_and_vol_and_vix = plot_data3(Df_frame, "SPandVolandViX.png"),
+  plot_vol_and_vix = plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
   lm1 = regress_data_harvix2(Df, file_out("written/tables/regression_harvix.tex")),

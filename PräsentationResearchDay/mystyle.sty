@@ -33,8 +33,22 @@
 % page number the slides
 \setbeamertemplate{footline}[frame number]
 
-% Set item type
+% Set item type 
 \setbeamertemplate{items}[circle]
+\defbeamertemplate{itemize item}{compoundarrow}{\rule[0.5ex]{0.6ex}{0.6ex}%
+  \scriptsize\raise2pt\hbox{$\!{\blacktriangleright}$}}
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows}
+\defbeamertemplate{itemize item}{tikzarrow}{\tikz{\node[single
+arrow,scale=0.2,inner sep=2ex,fill] at (0,0) {};}}
+\newcommand\pro{\item[$+$]}
+\newcommand\con{\item[$-$]}
+
+% intent
+\setlength\parindent{0pt}
+
+
+
 
 % Bibliography
 \usepackage[
