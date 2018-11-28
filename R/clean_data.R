@@ -7,14 +7,14 @@
 #'
 #' @examples
 #' Clean_Vol(Vol_raw)
-Clean_Vol2 <- function(infile) {
+Clean_Vol <- function(infile) {
   Vol <- (infile[-(1:2),1:2]) # take out columns and rows I do not need
-  colnames(Vol) <- c("Date", "RealizedVariance") # rename columns
+  colnames(Vol) <- c("Date", "RealizedVolatility") # rename columns
   Vol$Date <- as.Date(as.character(Vol$Date), "%Y%m%d") # turn Date into appropriate time-based object
-  Vol$RealizedVariance <- as.numeric(as.character(Vol$RealizedVariance))*10000 %>% sqrt # turn RealizedVola (daily) to numeric -> Vola = sd
+  Vol$RealizedVolatility <- as.numeric(as.character(Vol$RealizedVolatility)) %>% sqrt() # turn RealizedVola (daily) to numeric -> Vola = sd
+  Vol$RealizedVolatility <- Vol$RealizedVolatility*100
   return(Vol)
 }
-
 
 
 #' Cleans the VIX data with date format YYYY-MM-DD

@@ -20,7 +20,7 @@ my_plan <- drake_plan(
   SP_raw = read_excel(file_in("data-raw/sandp500.xls"), range = "A767:D8197", col_names = FALSE),
 
   # clean data
-  Vol = Clean_Vol2(Vol_raw),
+  Vol = Clean_Vol(Vol_raw),
   Vix1 =  Clean_Vix1(Vix1_raw),
   Vix2 = Clean_Vix2(Vix2_raw),
   SP = Clean_SP(SP_raw),
@@ -28,7 +28,7 @@ my_plan <- drake_plan(
   Df = Build_df(Vix1, Vix2, Vol, SP),
 
   # plot data and save plot
-  plot_var = plot_data1(Df$RealizedVariance, "Realized Variance", "var.png"),
+  plot_var = plot_data1(Df$RealizedVolatility, "Realized Volatility", "var.png"),
   plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
   plot_sp_and_vix = plot_data2(Df_frame, "SPandViX.png"),
   plot_sp_and_vol_and_vix = plot_data3(Df_frame, "SPandVolandViX.png"),
@@ -52,7 +52,7 @@ summary(Df_frame)
 
 
 
-summary(Df$RealizedVariance)
+
 
 
 ## Merkzettel --------------------------------
