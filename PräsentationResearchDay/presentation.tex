@@ -156,20 +156,20 @@ Author: Sophia Gläser (7. Semester BA CME)}
 %
 Stepwise regression to compare information content:
 	\begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} 
+	\sigma_{t} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} 
 	\end{equation}	
 	\begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{VIX} VIX^{VIX}_{t}
+	\sigma_{t} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{VIX} VIX^{VIX}_{t}
 	\end{equation}
 $+$ the same regressions as log-log model\\
 with the weekly aggregation period being (monthly similar with 20 days):
 	\begin{equation*}
-	\sigma^{w}_{t} = \frac{1}{5} (RV^{d}_{t} + RV^{d}_{t-1d} + RV^{d}_{t-2d} + RV^{d}_{t-3d} + RV^{d}_{t-4d})
+	RV^{w}_{t} = \frac{1}{5} (RV^{d}_{t} + RV^{d}_{t-1d} + RV^{d}_{t-2d} + RV^{d}_{t-3d} + RV^{d}_{t-4d})
 	\end{equation*}
-and Realized Variance (RV) being: $	RV^{d}_{t} = \sqrt[]{\sum_{m=1}^{M} r^{2}_{t,m}} $\\
+and Realized Volatility (RV) being: $	RV^{d}_{t} = \sqrt[]{\sum_{m=1}^{M} r^{2}_{t,m}} $\\
 %
 \begin{footnotesize}
-$\sigma$ = Volatility (sd), $RV$ = Realized Variance with M equally spaced intraday returns for a day t, with m = 1,..,M, here 10min returns
+$\sigma$ = Volatility (sd), $RV$ = Realized Volatility with M equally spaced intraday returns for a day t, with m = 1,..,M, here 10min returns
 \end{footnotesize}
 %
 \end{frame}
@@ -178,7 +178,7 @@ $\sigma$ = Volatility (sd), $RV$ = Realized Variance with M equally spaced intra
 \frametitle{My Method: Regression and HAR Model}
 HAR-RV Model (according to \textcite{corsi2009}, but not implemented yet), idea:
 \begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \tilde{w}^{d}_{t+1d}
+	\sigma_{t} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \tilde{w}^{d}_{t+1d}
 	\end{equation}	
 \begin{footnotesize}
 $\tilde{w}^{d}_{t+1d}$ = innovation term
@@ -312,7 +312,7 @@ calculate the price of European call and put option:
 \end{frame}
 
 \begin{frame}
-\frametitle{Realized Variance}
+\frametitle{Realized Volatility}
 \begin{footnotesize}
 	\begin{equation}
 	RV^{d}_{t} = \sqrt[]{\sum_{m=1}^{M} r^{2}_{t,m}}
