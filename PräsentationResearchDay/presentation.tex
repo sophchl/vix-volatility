@@ -26,28 +26,28 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{Motivation: Why this project? Why does Volatility matter?}
 	\begin{itemize}
-	\item Risk measurement for the stability of the financial system
+	\item<1-> Risk measurement and the stability of the financial system
 		\begin{itemize}
-		\item Volatility is closely related to risk 
-		\item Volatility is crucial input to risk measures, such as the Value at Risk
+		\item<1-> Volatility is closely related to risk 
+		\item<1-> Volatility is crucial input to risk measures, such as the Value at Risk
 		\end{itemize}
-	\item Volatility is used for..
+	\item<2-> Volatility is used for..
 		\begin{itemize}
-		\item .. the pricing of financial instruments, such as derivatives
-		\item .. the risk-return trade-off and therefore management decisions
+		\item<2-> .. the pricing of financial instruments, such as derivatives
+		\item<2-> .. the risk-return trade-off and therefore management decisions
 		\end{itemize}
-	\item Forecast potential
+	\item<3-> Forecast potential
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{More closely: What exactly is Volatility?}
 	\begin{itemize}
-	\item In Finance, we are usually interested in the \textit{conditional} standard deviation from the expected value of the underlying asset return \parencite{tsay2005}
-	\item What causes asset price movement and thus volatility?
+	\item<1-> In Finance, we are usually interested in the \textit{conditional} standard deviation from the expected value of the underlying asset return \parencite{tsay2005}
+	\item<2-> What causes asset price movement and thus volatility?
 		\begin{itemize}
-		\item Assuming Market efficiency (as introduced by \citeauthor{fama1970}), stock prices incorporate all available information from the market, because of competition and free entry 
-		\item But that does not does not give us information about the volatility of stock prices
+		\item<3-> Assuming Market efficiency (as introduced by \citeauthor{fama1970}), stock prices incorporate all available information from the market
+		\item<3-> But that does not does not give us information about the volatility of stock prices
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -55,16 +55,16 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{The Problem: Why is it so hard to measure and forecast volatility?}
 	\begin{itemize}
-	\item Volatility is not directly observable
+	\item<1-> Volatility is not directly observable
 		\begin{itemize}
-		\item We can estimate it for a given time period 
-		\item However, stock volatility consists of intraday and overnight volatility, each containing different information
+		\item<1-> We can estimate it for a given time period 
+		\item<1-> The problem is, each period contains different information
 		\end{itemize}
-	\item We can however observe some characteristics of volatility (stylized facts), such as
+	\item<2-> We can however observe stylized facts of volatility
 		\begin{itemize}
-		\item volatility clustering (periods of high volatility are followed by periods of high volatility, and similar for low volatility)
-		\item volatility is often stationary (it varies only within a fixed range)
-		\item leverage effect: volatility reacts differently to price drop or increase
+		\item<2-> Volatility clustering 
+		\item<2-> Variation within a fixed range
+		\item<2-> Leverage effect: different reaction to price drop or increase
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -72,13 +72,13 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{Maybe a solution: How volatility has been calculated so far}
 	\begin{itemize}
-	\item According to this stylized facts, we can use (econmetric) models that best capture the characteristics of volatility
-	\item There is however multiple approaches to model volatility, examples are
+	\item<1-> According to this stylized facts, we can use models that best capture the characteristics of volatility
+	\item<2-> There are multiple approaches, examples are
 		\begin{itemize}
-		\item Econometric models using historic volatility (e.g. ARCH)
-		\item Black-and-Scholes implied volatility
+		\item<2-> Econometric models using historic volatility (e.g. ARCH)
+		\item<2-> Black-and-Scholes implied volatility
 		\end{itemize}
-	\item Many papers argue, that Black-and Scholes implied volatility contains significant information for realized volatility \parencite{jiang2005}
+	\item<3-> Many papers argue, that Black-and Scholes implied volatility contains significant information for realized volatility (e.g. \textcite{jiang2005})
 	\end{itemize}
 \end{frame}
 
@@ -86,36 +86,33 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \frametitle{Maybe a solution: Black-and-Scholes implied volatility}
 %
 	\begin{itemize}
-	\item Intuition behind Black-and-Scholes (BS) implied volatility
+	\item<1-> Intuition behind Black-and-Scholes (BS) implied volatility
 		\begin{itemize}
-		\item The BS model is an option pricng model, that uses volatility as an input
-		\pro By using option prices from the market, it is possible to turn the calculation around and derive an \textit{option implied volatility}
-		\pro as options are contracts to buy an underlying in the future, then contain the market's expectation of future stock price movement 
+		\item<1-> Option pricing model, that uses volatility as an input
+		\pro<1-> Reverse calculation and derive an \textit{option implied volatility}
+		\pro<1-> Options contain the market's expectation of future stock price movement 
 		\end{itemize}
 	%
-	\item There are however some problems with the BS implied volatility
+	\item<2-> Problems with the BS implied volatility
 		\begin{itemize}
-		\con The Black-and-Scholes model is mainly based on at-the-money options 
-		\con Most importantly The Black-and-Scholes model makes an assumption about how the prices are formed (pricing assumption), and assumes that stock prices follow geometric Brownian motion)
+		\con<2-> The BS model is mainly based on at-the-money options 
+		\con<2-> Most importantly the BS model has a pricing assumption
 		\end{itemize}
 	%
 \setbeamertemplate{itemize item}[compoundarrow]
-	\item Joint hypothesis problem: Testing for BS implied volatility is always a test of \textit{both} market effi	ciency and the BS pricing assumptions
+	\item<3-> Joint hypothesis problem
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Solving the joint hypothesis problem: Model-free implied volatility}
 	\begin{itemize}
-	\item For model-free implied volatility, no assumption is made regarding the underlying stochastic process, and it is not based on any particular option pricing model
+	\item<1-> Model-free implied volatility is not based on any particular option pricing model
+	\item<2-> One of the fist model-free implied volatility indices was the VIX from CBOE \parencite{exchange2009}
 		\begin{itemize}
-		\pro The VIX includes information from both at-the-money and out-of-money options
-		\pro As no pricing assumption is made, the model-free implied volatility provides a direct test of the informational efficiency of the options market
-		\item 
-		\end{itemize}
-	\item One of the fist model-free implied volatility indices was the VIX from CBOE \parencite{exchange2009}
-		\begin{itemize}
-		\item VIX measures the market's expectation of 30-day volatility
+		\item<2-> Measures the market's expectation of 30-day volatility
+		\pro<3-> Includes information from both at-the-money and out-of-money options
+		\pro<3-> No pricing assumption $\rightarrow$ direct test of the informational efficiency of the options market
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -157,12 +154,12 @@ Author: Sophia Gläser (7. Semester BA CME)}
 \begin{frame}
 \frametitle{My Method: Regression and HAR Model}
 %
-Stepwise regressions, to compare information content:
+Stepwise regression to compare information content:
 	\begin{equation}
 	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} 
 	\end{equation}	
 	\begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{m} VIX^{m}_{t}
+	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{VIX} VIX^{VIX}_{t}
 	\end{equation}
 $+$ the same regressions as log-log model\\
 with the weekly aggregation period being (monthly similar with 20 days):
@@ -179,17 +176,13 @@ $\sigma$ = Volatility (sd), $RV$ = Realized Variance with M equally spaced intra
 
 \begin{frame}
 \frametitle{My Method: Regression and HAR Model}
-HAR-RV Model (not implemented yet)
+HAR-RV Model (according to \textcite{corsi2009}, but not implemented yet), idea:
 \begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \tilde{w^{d}_{t+1d}}
+	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \tilde{w}^{d}_{t+1d}
 	\end{equation}	
-	\begin{equation}
-	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{m} VIX^{m}_{t} + \tilde{w}^{d}_{t+1d}
-	\end{equation}
 \begin{footnotesize}
-$\tilde{w}^{d}_{t+1d}$ = innovation
+$\tilde{w}^{d}_{t+1d}$ = innovation term
 \end{footnotesize}
-
 \end{frame}
 
 
