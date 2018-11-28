@@ -1,0 +1,338 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{mystyle}
+
+\title{Measuring the Information Content of VIX Volatility}
+\author{Context: Humboldt Project\\
+Supervisor: Prof. Franziska Peter\\
+Author: Sophia Gläser (7. Semester BA CME)}
+\date{\small \today}
+
+\addbibresource{./bib/bibliography.bib} 
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Motivation: Why this project? Why does Volatility matter?}
+	\begin{itemize}
+	\item<1-> Risk measurement and the stability of the financial system
+		\begin{itemize}
+		\item<1-> Volatility is closely related to risk 
+		\item<1-> Volatility is crucial input to risk measures, such as the Value at Risk
+		\end{itemize}
+	\item<2-> Volatility is used for..
+		\begin{itemize}
+		\item<2-> .. the pricing of financial instruments, such as derivatives
+		\item<2-> .. the risk-return trade-off and therefore management decisions
+		\end{itemize}
+	\item<3-> Forecast potential
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{More closely: What exactly is Volatility?}
+	\begin{itemize}
+	\item<1-> In Finance, we are usually interested in the \textit{conditional} standard deviation from the expected value of the underlying asset return \parencite{tsay2005}
+	\item<2-> What causes asset price movement and thus volatility?
+		\begin{itemize}
+		\item<3-> Assuming market efficiency (as introduced by \citeauthor{fama1970}), stock prices incorporate all available information from the market
+		\item<3-> But that does not does not give us information about the volatility of stock prices
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Problem: Why is it so hard to measure and forecast volatility?}
+	\begin{itemize}
+	\item<1-> Volatility is not directly observable
+		\begin{itemize}
+		\item<1-> We can estimate it for a given time period 
+		\item<1-> The problem is, each period contains different information
+		\end{itemize}
+	\item<2-> We can however observe stylized facts of volatility
+		\begin{itemize}
+		\item<2-> Volatility clustering 
+		\item<2-> Variation within a fixed range
+		\item<2-> Leverage effect: different reaction to price drop or increase
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Maybe a solution: How volatility has been calculated so far}
+	\begin{itemize}
+	\item<1-> According to this stylized facts, we can use models that best capture the characteristics of volatility
+	\item<2-> There are multiple approaches, examples are
+		\begin{itemize}
+		\item<2-> Econometric models using historic volatility (e.g. ARCH)
+		\item<2-> Black-and-Scholes implied volatility
+		\end{itemize}
+	\item<3-> Many papers argue, that Black-and Scholes implied volatility contains significant information for realized volatility (e.g. \textcite{jiang2005})
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Maybe a solution: Black-and-Scholes implied volatility}
+%
+	\begin{itemize}
+	\item<1-> Intuition behind Black-and-Scholes (BS) implied volatility
+		\begin{itemize}
+		\item<1-> Option pricing model, that uses volatility as an input
+		\pro<1-> Reverse calculation and derive an \textit{option implied volatility}
+		\pro<1-> Options contain the market's expectation of future stock price movement 
+		\end{itemize}
+	%
+	\item<2-> Problems with the BS implied volatility
+		\begin{itemize}
+		\con<2-> The BS model is mainly based on at-the-money options 
+		\con<2-> Most importantly the BS model has a pricing assumption
+		\end{itemize}
+	%
+\setbeamertemplate{itemize item}[compoundarrow]
+	\item<3-> Joint hypothesis problem
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solving the joint hypothesis problem: Model-free implied volatility}
+	\begin{itemize}
+	\item<1-> Model-free implied volatility is not based on any particular option pricing model
+	\item<2-> One of the fist model-free implied volatility indices was the VIX from CBOE \parencite{exchange2009}
+		\begin{itemize}
+		\item<2-> Measures the market's expectation of 30-day volatility
+		\pro<3-> Includes information from both at-the-money and out-of-money options
+		\pro<3-> No pricing assumption $\rightarrow$ direct test of the informational efficiency of the options market
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Data}
+
+\begin{frame}
+\frametitle{Volatility of S\&P 500}
+	\begin{itemize}
+	\item Components of Dataset
+		\begin{itemize}
+		\item VIX, downloaded from CBOE
+		\item Realized Volatility, downloaded from Oxford Man Institute
+		\item S\&P 500, downloaded from CBOE
+		\end{itemize}
+	\item Sampling period January 2000 - December 2017
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{S\&P 500 in Comparison to VIX}
+	\begin{figure}
+	\centering
+	\includegraphics[scale = 0.35]{graphics/SPandViX.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{S\&P 500 in Comparison to VIX and Realized Volatility}
+	\begin{figure}
+	\centering
+	\includegraphics[scale = 0.35]{graphics/SPandVolandViX.png}
+	\end{figure}
+\end{frame}
+
+\section{Method}
+
+
+\begin{frame}
+\frametitle{My Method: Regression and HAR Model}
+%
+Stepwise regression to compare information content:
+	\begin{equation}
+	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} 
+	\end{equation}	
+	\begin{equation}
+	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \beta^{VIX} VIX^{VIX}_{t}
+	\end{equation}
+$+$ the same regressions as log-log model\\
+with the weekly aggregation period being (monthly similar with 20 days):
+	\begin{equation*}
+	\sigma^{w}_{t} = \frac{1}{5} (RV^{d}_{t} + RV^{d}_{t-1d} + RV^{d}_{t-2d} + RV^{d}_{t-3d} + RV^{d}_{t-4d})
+	\end{equation*}
+and Realized Variance (RV) being: $	RV^{d}_{t} = \sqrt[]{\sum_{m=1}^{M} r^{2}_{t,m}} $\\
+%
+\begin{footnotesize}
+$\sigma$ = Volatility (sd), $RV$ = Realized Variance with M equally spaced intraday returns for a day t, with m = 1,..,M, here 10min returns
+\end{footnotesize}
+%
+\end{frame}
+
+\begin{frame}
+\frametitle{My Method: Regression and HAR Model}
+HAR-RV Model (according to \textcite{corsi2009}, but not implemented yet), idea:
+\begin{equation}
+	\sigma_{t+1} = c + \beta^{d} RV^{d}_{t-1} + \beta^{w} RV^{w}_{t-1} + \beta^{m} RV^{m}_{t} + \tilde{w}^{d}_{t+1d}
+	\end{equation}	
+\begin{footnotesize}
+$\tilde{w}^{d}_{t+1d}$ = innovation term
+\end{footnotesize}
+\end{frame}
+
+
+\section{Results so far}
+
+\begin{frame}
+\frametitle{Regression Results}
+\begin{scriptsize}
+\begin{minipage}{0.45\textwidth}
+	\begin{figure}[!htbp]
+	\caption{level-level Model}
+	\centering
+	\input{tables/regression_harvix.tex}
+	\end{figure}
+\end{minipage}
+%
+\begin{minipage}{0.45\textwidth}
+	\begin{figure}[!htbp]
+	\caption{log-log Model}
+	\centering
+	\input{tables/regression_harvixln.tex}
+	\end{figure}
+\end{minipage}
+\end{scriptsize}
+\end{frame}
+
+
+\section{Possible Problems coming up}
+
+\begin{frame}
+\frametitle{Next steps/Questions to solve}
+	\begin{itemize}
+	\item Having gathered all this information about volatility measurement, what is the most accurate way to set up my regressions and my HAR-RV model?
+	\item Next step: Bring current state of work to paper
+	\end{itemize}
+\end{frame}
+
+%\section*{Sources}
+
+\begin{frame}
+\printbibliography
+\end{frame}
+
+\section{Appendix}
+\begin{frame}
+\frametitle{The Black and Scholes Equation}
+%
+\begin{minipage}{0.6\textwidth}
+\begin{small}
+%
+price of an option over time:
+\begin{equation}
+	\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2} \frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+	+ \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+	\mathrm r \mathrm C 
+	\label{eq:1}
+\end{equation}
+%
+calculate the price of European call and put option: 
+\begin{equation}
+	\mathrm C(\mathrm S,\mathrm t)= \mathrm N(\mathrm d_1)\mathrm S - \mathrm N(\mathrm d_2) \mathrm K \mathrm e^{-rt}
+	\label{eq:2}
+\end{equation}
+\vspace{-3pt}
+%
+\begin{equation}
+	\mathrm d_1= \frac{1}{\sigma \sqrt{\mathrm t}} \left[\ln{\left(\frac{S}{K}\right)} + t\left(r + \frac{\sigma^2}{2} \right) \right]
+\end{equation}
+\vspace{-3pt}
+%
+\begin{equation}
+	\mathrm d_2= \frac{1}{\sigma \sqrt{\mathrm t}} \left[\ln{\left(\frac{S}{K}\right)} + t\left(r - \frac{\sigma^2}{2} \right) \right]
+\end{equation}
+\vspace{-3pt}
+%
+\begin{equation}
+	N(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} \mathrm e^{-\frac{1}{2}z^2} dz
+	\label{eq:5}
+\end{equation}
+\end{small}
+\end{minipage}
+%
+\begin{minipage}{0.35\textwidth}
+\begin{footnotesize}
+\begin{itemize}
+	\item[] C = Call option price 
+	\item[] S = Current stock price
+	\item[] K = Strike price of the option
+	\item[] r = risk-free interest rate (a number between 0 and 1)
+	\item[] $\sigma$ = volatility of the stocks return (a number between 0 and 1)
+	\item[] t = time to option maturity (in years)
+	\item[] N = normal cumulative distribution function
+\end{itemize}
+\end{footnotesize}
+\end{minipage}
+%
+\end{frame}
+
+\begin{frame}
+\frametitle{The VIX Equation}
+	\begin{equation}
+	\sigma^{2} = \frac{2}{T} \sum_{i} \frac{\Delta K_{i}}{K_{i}^{2}} e^{RT} Q(K_{i}) - \frac{1}{T} (\frac{F}{K_{0}} - 1)^{2}
+	\end{equation}
+	%
+	\begin{footnotesize}
+	$VIX = \sigma*100$, $T$ = Time to expiration, $F$ = Forward index level derived from index option prices, $K_{0}$ = first strike price below the forward index level, $K_{i}$ = strike price of $i^{th}$ out-of-the money option (call if $K_{i} > K_{0}$ and put if $K_{i} < K_{0}$), $\Delta K_{i}$ = interval between strike prices, $R$ = Risk-free rate to expiration, $Q(K_{i})$ = midpoint of bid-ask spread for each option with strike $K_{i}$
+	\end{footnotesize}
+\end{frame}
+
+\begin{frame}
+\frametitle{About the VIX}
+\begin{footnotesize}
+\begin{itemize}
+	\item 1993 CBOE introduced the first VIX, to measure the market's expectation for volatility, in 30-day period, based on S\&P100 Index at-the-money options
+	\item 2003 CBOE updated the VIX (together with Goldman Sachs)
+	\begin{itemize}
+	\item now based on S\&P500 Index (liquidity reasons)
+	\end{itemize}
+	\item 2014 CBOE enhanced VIX
+	\begin{itemize}
+	\item include also weekly options, thus most precisely match 30-day time frame 
+	\item use SPX options with x $[23<x<36]$ days to expiration to reflect an interpolation of two points
+	\end{itemize}
+	\item Today, VIX is also a tradable asset (negative correlation to stock market returns makes it variable diversification)
+	\end{itemize}
+	\end{footnotesize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Realized Variance}
+\begin{footnotesize}
+	\begin{equation}
+	RV^{d}_{t} = \sqrt[]{\sum_{m=1}^{M} r^{2}_{t,m}}
+	\end{equation}
+with r being: 
+	\begin{equation}
+	R = \frac{P_{t} - P_{t-1}}{P_{t-1}} 
+	\Leftrightarrow 1 + R_{t} = \frac{P_{t}}{P_{t-1}}
+	\end{equation}
+	with continuously compounded return (log return)
+	\begin{equation}
+	r_{t} = ln(1 + R_{t}) = ln\frac{P_{t}}{P_{t-1}} = p_{t} - p_{t-1}
+	\end{equation}
+	$RV$ = realized volatility, $R$ = asset return, $r = ln(R)$, $P$ = asset price, $p=ln(P)$\\
+Why returns instead of asset prices?\\
+	\begin{itemize}
+	\item Returns are easier to handle than price series, because of statistical properties (e.g. time additivity)
+	\item Asset return is a complete and scale-free summary of the investment opportunity (MacKinlay 1997 from \textcite{tsay2005})
+	\end{itemize}
+\end{footnotesize}
+\end{frame}
+
+\end{document}

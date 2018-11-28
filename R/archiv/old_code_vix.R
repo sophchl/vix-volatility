@@ -183,9 +183,98 @@ Lead_var <- Hmisc::Lag(Df$RealizedVariance, shift = -1)
 Df$RealizedVariance[1:5,]
 head(Lag_var)
 head(Lead_var)
-tail(lag)
-tail(lead)
-class(Df)
 
 
+plot_data2(Df$RealizedVariance, Df$VIX.Close, "RV and VIX", "test.png")
+autoplot(Df$RealizedVariance, Df$VIX.Close)
+autoplot(Df$RealizedVariance)
+
+
+
+
+
+head(Df)
+head(Df_frame)
+
+ggplot(data = Df_frame, aes(x = Date, y = RealizedVariance)) + geom_line(color = "#00AFBB", size = 1) +
+  theme_minimal()
+
+ggplot(data = Df_frame, aes(x=Date, y = VIX.Close)) + geom_line(color = "#00AFBB", size = 1) +
+  theme_minimal()
+
+ggplot(data = Df_frame, aes(x=Date, y = SP500)) + geom_line(color = "#00AFBB", size = 1) +
+  theme_minimal()
+
+
+ggplot(Df_frame, aes(x = Date)) +
+  geom_line(aes(y = RealizedVariance, color = "Realized Variance"), size = 1) + ## realized variance in blue
+  geom_line(aes(y = VIX.Close/1000,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
+  scale_y_continuous(sec.axis = sec_axis(~.*1000, name = "VIX")) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  labs(y = "Realized Variance", color = "Legend") +
+  theme(legend.position = c(0.8, 0.9))
+
+
+ggplot(Df_frame, aes(x = Date)) +
+  geom_line(aes(y = VIX.Close,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
+  geom_line(aes(y = SP500/20, color = "SP500"), size = 1) + ## SP500 in blue
+  scale_y_continuous(sec.axis = sec_axis(~.*20, name = "S&P 500", breaks = c(400,800,1200,1600,2000)), breaks = c(20,40,60,80,100)) +
+  scale_x_date(breaks = "2 years", date_labels = "%Y") +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  labs(y = "VIX (Close)", x = "Year", color = "Legend") +
+  theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
+        text = element_text(size = 20), axis.text = element_text(size = 14))
+
+
+## VIX AND SANDP
+
+plot_data2 <- function(infile){
+  ggplot(infile, aes(x = Date)) +
+    geom_line(aes(y = VIX.Close,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
+    geom_line(aes(y = SP500/20, color = "SP500"), size = 1) + ## SP500 in blue
+    scale_y_continuous(sec.axis = sec_axis(~.*20, name = "S&P 500", breaks = c(400,800,1200,1600,2000)), breaks = c(20,40,60,80,100)) +
+    scale_x_date(breaks = "2 years", date_labels = "%Y") +
+    scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+    labs(y = "VIX (Close)", x = "Year", color = "Legend") +
+    theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
+          text = element_text(size = 15), axis.text = element_text(size = 15))
+}
+
+plot_data2(Df_frame)
+
+## VIX AND RV AND SANDP
+
+plot_data3 <- function(infile){
+  ggplot(infile, aes(x = Date)) +
+    geom_line(aes(y = VIX.Close,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
+    geom_line(aes(y = SP500/20, color = "SP500"), size = 1) + ## SP500 in blue
+    geom_line(aes(y = RealizedVariance*200, color = "Realized Volatility"), size = 1) + # RV in green
+    scale_y_continuous(sec.axis = sec_axis(~.*20, name = "S&P 500", breaks = c(400,800,1200,1600,2000)), breaks = c(20,40,60,80,100)) +
+    scale_x_date(breaks = "2 years", date_labels = "%Y") +
+    scale_color_manual(values = c("darkseagreen3", "#00AFBB", "#E7B800")) +
+    labs(y = "VIX (Close)", x = "Year", color = "Legend") +
+    theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
+          text = element_text(size = 15), axis.text = element_text(size = 15))
+}
+
+plot_data3(Df_frame)
+
+## VIX AND RV
+
+plot_data4 <- function(infile){
+  ggplot(infile, aes(x = Date)) +
+    geom_line(aes(y = VIX.Close/200,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
+    geom_line(aes(y = RealizedVariance, color = "Realized Volatility"), size = 1) +
+    scale_y_continuous(sec.axis = sec_axis(~.*200, name = "VIX", breaks = c(20,40,60,80,100)), breaks = c(0.1, 0.2, 0.3, 0.4, 0.5), limits = c(0,0.5)) +
+    scale_x_date(breaks = "2 years", date_labels = "%Y") +
+    scale_color_manual(values = c("darkseagreen3", "#E7B800")) +
+    labs(y = "VIX (Close)", x = "Year", color = "Legend") +
+    theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
+          text = element_text(size = 15), axis.text = element_text(size = 15))
+}
+
+plot_data4(Df_frame)
+
+
+head(Df_frame)
 

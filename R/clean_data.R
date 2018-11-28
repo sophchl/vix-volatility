@@ -11,7 +11,7 @@ Clean_Vol2 <- function(infile) {
   Vol <- (infile[-(1:2),1:2]) # take out columns and rows I do not need
   colnames(Vol) <- c("Date", "RealizedVariance") # rename columns
   Vol$Date <- as.Date(as.character(Vol$Date), "%Y%m%d") # turn Date into appropriate time-based object
-  Vol$RealizedVariance <- as.numeric(as.character(Vol$RealizedVariance))*10000 %>% sqrt # turn RealizedVola (daily) to numeric
+  Vol$RealizedVariance <- as.numeric(as.character(Vol$RealizedVariance))*10000 %>% sqrt # turn RealizedVola (daily) to numeric -> Vola = sd
   return(Vol)
 }
 
@@ -37,7 +37,6 @@ Clean_Vix1 <- function(infile) {
 
 
 
-
 #' Cleans the VIX data with date format D/M/YYYY
 #'
 #' @param infile
@@ -56,5 +55,23 @@ Clean_Vix2 <- function(infile) {
 }
 
 
+
+#' Cleans the S&P500 Data
+#'
+#' @param infile a data.frame
+#'
+#' @return a data.frame with 2 columns: Date and S&P500
+#' @export
+#'
+#' @examples
+#' Clean_SP(SP_raw)
+#'
+Clean_SP <- function(infile) {
+  SP <- infile[,c(1,4)]
+  colnames(SP) <- c("Date", "SP500")
+  SP <- as.data.frame(SP)
+  SP[,1] <- as.Date(SP[,1])
+  return(SP)
+}
 
 
