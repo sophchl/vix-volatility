@@ -46,7 +46,10 @@ make(my_plan)
 vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame))
-summary(Df_frame)
+
+head(Df)
+head(Df_frame)
+
 
 # rm(list = ls())
 

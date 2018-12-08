@@ -31,6 +31,7 @@ Clean_Vix1 <- function(infile) {
   colnames(Vix1) <- c("Date", "VIX.Close") # rename columns
   Vix1$Date <- as.Date(Vix1$Date) # turn Date into appropriate time-based object
   Vix1$VIX.Close <- as.numeric(as.character(Vix1$VIX.Close)) # turn Close into numeric
+  Vix1$VIX.Close <- Vix1$VIX.Close/sqrt(360) # turn from annualized to daily
   Vix1 <- as.data.frame(Vix1) # turn Vix1 into data.frame (before: tbl.df, tbl, data.frame)
   return(Vix1)
 }
@@ -51,6 +52,7 @@ Clean_Vix2 <- function(infile) {
   colnames(Vix2) <- c("Date", "VIX.Close") # rename columns
   Vix2$Date <- as.Date(Vix2$Date, format = "%m/%d/%Y") # turn Date into appropriate time-based object
   Vix2$VIX.Close <- as.numeric(as.character(Vix2$VIX.Close)) # turn Close into numeric
+  Vix2$VIX.Close <- Vix2$VIX.Close/sqrt(360) # turn from annualized to daily
   return(Vix2)
 }
 
@@ -67,7 +69,7 @@ Clean_Vix2 <- function(infile) {
 #' Clean_SP(SP_raw)
 #'
 Clean_SP <- function(infile) {
-  SP <- infile[,c(1,4)]
+  SP <- infile[,c(1,4)] # column 1 is date, column 4 is Close S&P500
   colnames(SP) <- c("Date", "SP500")
   SP <- as.data.frame(SP)
   SP[,1] <- as.Date(SP[,1])
