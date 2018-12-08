@@ -32,7 +32,7 @@ plot_data1 <- function(variable, title, save_name) {
 #' @examples
 #' plot_data2(Df_frame)
 #'
-plot_data2 <- function(infile, save_name){
+plot_data2a <- function(infile, save_name){
  plot <-  ggplot(infile, aes(x = Date)) +
     geom_line(aes(y = VIX.Close,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
     geom_line(aes(y = SP500/500, color = "SP500"), size = 1) + ## SP500 in blue
@@ -96,5 +96,4 @@ plot_data4 <- function(infile, save_name){
   ggsave(save_name, plot = last_plot(), width = 16, path = "written/pictures")
 }
 
-sec.axis = sec_axis(~.*1, name = "VIX", breaks = c(seq(from = 1, to = 9, by = 1)))
 
