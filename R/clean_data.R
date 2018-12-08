@@ -26,7 +26,7 @@ Clean_Vol <- function(infile) {
 #'
 #' @examples
 #' Clean_Vix1(Vix1_raw)
-Clean_Vix1 <- function(infile) {
+Clean_VixA <- function(infile) {
   Vix1 <- infile[,-(2:4)] # remove what I do not need
   colnames(Vix1) <- c("Date", "VIX.Close") # rename columns
   Vix1$Date <- as.Date(Vix1$Date) # turn Date into appropriate time-based object
@@ -47,7 +47,7 @@ Clean_Vix1 <- function(infile) {
 #'
 #' @examples
 #' Clean_Vix2(Vix2_raw)
-Clean_Vix2 <- function(infile) {
+Clean_VixB <- function(infile) {
   Vix2 <- infile[,-(2:4)] # remove what I do not need
   colnames(Vix2) <- c("Date", "VIX.Close") # rename columns
   Vix2$Date <- as.Date(Vix2$Date, format = "%m/%d/%Y") # turn Date into appropriate time-based object
