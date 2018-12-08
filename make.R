@@ -4,6 +4,7 @@ library(drake)
 library(tidyverse)
 library(readxl)
 library(xts)
+library(tseries)
 library(VIXVolatility)
 pkgconfig::set_config("drake::strings_in_dots" = "literals")
 
@@ -26,6 +27,7 @@ my_plan <- drake_plan(
   SP = Clean_SP(SP_raw),
   Df = Build_df(Vix1, Vix2, Vol, SP),
   Df_frame = Build_df2(Vix1, Vix2, Vol, SP),
+  Df_full = na.omit(Df),
 
   # plot data and save plot
   plot_var = plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
@@ -38,14 +40,16 @@ my_plan <- drake_plan(
   lm1 = regress_data_harvix2(Df, file_out("written/tables/regression_harvix.tex")),
   lm2 = regress_data_harvixln2(Df, file_out("written/tables/regression_harvixln.tex"))
 
-  #
+  # graphical exploration of time series data
+
+  # HAR-RV model
 
 )
 
 make(my_plan)
 vis_drake_graph(drake_config(my_plan))
 
-loadd(c(Df,Df_frame))
+loadd(c(Df,Df_frame, Df_full))
 
 # rm(list = ls())
 

@@ -189,9 +189,16 @@ plot_data2(Df$RealizedVariance, Df$VIX.Close, "RV and VIX", "test.png")
 autoplot(Df$RealizedVariance, Df$VIX.Close)
 autoplot(Df$RealizedVariance)
 
+## try the average-----
+rollapply(data= Df$RealizedVolatility,width = 5,FUN = mean,na.rm = T)[1:10,]
+ep1 <- endpoints(Df,on="weeks",k=2)
+period.apply(Df$RealizedVolatility, INDEX=ep1, FUN=mean)[1:10,]
+Df$RealizedVolatility[1:10,]
+sum(Df$RealizedVolatility[1:5,])/5
+# rollapply seems to lead the right results
 
 
-
+## try ggplots before I implement then ------------------------
 
 head(Df)
 head(Df_frame)

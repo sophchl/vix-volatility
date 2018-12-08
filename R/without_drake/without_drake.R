@@ -1,4 +1,4 @@
-## without drake
+## packages ------
 library(tidyverse)
 library(tseries) # for handling ts data, e.g. plot.ts()
 library(lubridate) # for nice dates
@@ -70,10 +70,47 @@ plot_vix <- autoplot(Df$VIX.Close) +
 
 # graphic analysis shows large peak in 2009, otherwise smaller peaks -> linear model good?
 
-## check for stationarity: decompose time series ----
+## time series observation ----
+
+# basic time series observation
+index(Df)
+start(Df)
+end(Df)
+frequency(Df)
+periodicity(Df)
+nmonths(Df)
+str(Df)
+
+# use endpoints to calculate period values -> rollapply works better I think
+ep1 <- endpoints(Df,on="weeks",k=2)
+ep2 <- endpoints(Df,on="months")
+period.apply(Df$RealizedVolatility, INDEX=ep1, FUN=mean)
+period.apply(Df$RealizedVolatility,INDEX=ep2,FUN=mean)
+
+# check for stationarity: decompose time series
 # stationarity: mean is constant over time, variance does not increase over time, seasonality effect is minimal
 
-decomposedR <- decompose(Df, type = "mult") # soll Zeitreihe in Trend, Saison und irreguläre Komponente zerlegen
+decompose(Df_full, type = "mult") # soll Zeitreihe in Trend, Saison und irreguläre Komponente zerlegen
+decompose(log(Df$SP500))
+
+# seasonal decomposition
+stl(log(Df_full$RealizedVolatility), s.window="months")
+stl(Df$SP500)
+
+# check stationarity with augmented dickey fuller test
+adf.test(na.omit(Df$RealizedVolatility)) # looks stationary (reject H0 that it is not stationary)
+adf.test(Df$SP500) # does not look stationary (can not reject H0 that it is stationary)
+adf.test(Df$VIX.Close) # looks stationary (reject H0 that it is not stationary)
+adf.test(log(Df$SP500)) # not statioary either
+
+# plot ACF and PACF
+# PACF: correlation between a variable and a lag of itself that is not explained by correlations at all lower-order-lags.
+acf(Df_full)
+pacf(Df_full)
+pacf(Df_full$RealizedVolatility)
+Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% na.omit() %>% pacf
+Df$RealizedVolatility %>% rollapply(20,mean,na.rm = T) %>% na.omit() %>% pacf
+
 
 ## regress data -------------------------------
 
