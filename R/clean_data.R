@@ -7,11 +7,12 @@
 #'
 #' @examples
 #' Clean_Vol(Vol_raw)
-Clean_Vol <- function(infile) {
+Clean_VolA <- function(infile) {
   Vol <- (infile[-(1:2),1:2]) # take out columns and rows I do not need
-  colnames(Vol) <- c("Date", "RealizedVolatility") # rename columns
+  colnames(Vol) <- c("Date", "RealizedVariance") # rename columns
   Vol$Date <- as.Date(as.character(Vol$Date), "%Y%m%d") # turn Date into appropriate time-based object
-  Vol$RealizedVolatility <- as.numeric(as.character(Vol$RealizedVolatility)) %>% sqrt() # turn RealizedVola (daily) to numeric -> Vola = sd
+  Vol$RealizedVariance <- Vol$RealizedVariance * 100 * 100
+  Vol$RealizedVolatility <- as.numeric(as.character(Vol$RealizedVariance)) %>% sqrt() # turn RealizedVola (daily) to numeric -> Vola = sd
   Vol$RealizedVolatility <- Vol$RealizedVolatility*100
   return(Vol)
 }
@@ -26,7 +27,7 @@ Clean_Vol <- function(infile) {
 #'
 #' @examples
 #' Clean_Vix1(Vix1_raw)
-Clean_VixA <- function(infile) {
+Clean_Vix <- function(infile) {
   Vix1 <- infile[,-(2:4)] # remove what I do not need
   colnames(Vix1) <- c("Date", "VIX.Close") # rename columns
   Vix1$Date <- as.Date(Vix1$Date) # turn Date into appropriate time-based object
@@ -47,7 +48,7 @@ Clean_VixA <- function(infile) {
 #'
 #' @examples
 #' Clean_Vix2(Vix2_raw)
-Clean_VixB <- function(infile) {
+Clean_Vix <- function(infile) {
   Vix2 <- infile[,-(2:4)] # remove what I do not need
   colnames(Vix2) <- c("Date", "VIX.Close") # rename columns
   Vix2$Date <- as.Date(Vix2$Date, format = "%m/%d/%Y") # turn Date into appropriate time-based object

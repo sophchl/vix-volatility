@@ -24,9 +24,9 @@ my_plan <- drake_plan(
   SP_raw = read_excel(file_in("data-raw/sandp500.xls"), range = "A767:D8197", col_names = FALSE),
 
   # clean data
-  Vol = Clean_Vol(Vol_raw),
-  Vix1 =  Clean_VixA(Vix1_raw),
-  Vix2 = Clean_VixB(Vix2_raw),
+  Vol = Clean_VolA(Vol_raw),
+  Vix1 =  Clean_Vix(Vix1_raw),
+  Vix2 = Clean_Vix(Vix2_raw),
   SP = Clean_SP(SP_raw),
   Df = Build_df(Vix1, Vix2, Vol, SP),
   Df_frame = Build_df2(Vix1, Vix2, Vol, SP),
