@@ -5,6 +5,7 @@ library(tidyverse)
 library(readxl)
 library(tseries)
 library(xts)
+library(highfrequency)
 
 library(VIXVolatility)
 
@@ -39,8 +40,8 @@ my_plan <- drake_plan(
   plot_vol_and_vix = plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
-  lm1 = regress_data_harvix(Df, file_out("written/tables/regression_harvix.tex")),
-  lm2 = regress_data_harvixln(Df, file_out("written/tables/regression_harvixln.tex"))
+  lm1 = regress_data_harvix1(Df, file_out("written/tables/regression_harvix.tex")),
+  lm2 = regress_data_harvixln1(Df, file_out("written/tables/regression_harvixln.tex"))
 
   # graphical exploration of time series data
 
@@ -52,6 +53,7 @@ make(my_plan)
 vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame, Df_full))
+loadd(c(lm1,lm2))
 
 # rm(list = ls())
 
