@@ -2,11 +2,13 @@ library(usethis)
 library(devtools)
 library(drake)
 library(tidyverse)
-library(readxl)
-library(xts)
-library(tseries)
-library(astsa)
 library(VIXVolatility)
+
+# library(readxl)
+# library(tseries)
+# library(astsa)
+# ibrary(xts)
+
 pkgconfig::set_config("drake::strings_in_dots" = "literals")
 
 theme_set(theme_light())

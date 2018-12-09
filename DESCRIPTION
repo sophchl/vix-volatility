@@ -19,4 +19,6 @@ Imports:
     dplyr,
     zoo,
     xts,
-    texreg
+    texreg,
+    highfrequency,
+    astsa
