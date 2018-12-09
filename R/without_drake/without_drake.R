@@ -124,6 +124,10 @@ plot(log(Df$SP500))
 plot(diff(log(Df$SP500))) # quasi log(1+r) -> should be distributed log-normally
 plot(density(na.omit(diff(log(Df$SP500)))))
 
+# distribution
+plot(density(Df_full$Returns))
+plot(density(Df_full$Returns_log))
+
 
 ## regress data -------------------------------
 
@@ -150,19 +154,26 @@ summary(lm2b)
 
 # determine the order of the lags: look at ACF and PACF
 
-# in time series observation, I found out
-
 ARModel <- ar(Df_full, aic = TRUE, order.max = NULL,
               method = "yule-walker")
 
 ARModel2 <- sarima(Df_full$RealizedVolatility, 1,0,0) #1 = AR order, 0 = differince order, 0 = MA order
-# I have super high residual correlation with AR(1)
 ARModel2$ttable
 
-Df$RealizedVariance <- Df$RealizedVolatility * Df$RealizedVolatility
+# I have super high residual correlation with AR(1)
+
+Df$Returns <- CalculateReturns(Df$SP500, method = "log")
+test <- CalculateReturns(Df$SP500, method = "discrete")
 Df_full <- na.omit(Df)
-HARModel1 <- harModel(Df_full$RealizedVariance, periods = c(1,5,22), RVest = c("rCov"), type = "HARRV")
+head(Df_full$Returns)
+head(Df$SP500)
+
+HARModel1 <- harModel(Df_full$Returns, periods = c(1,5,22), RVest = c("rCov"), type = "HARRV")
 HARModel1 %>% summary()
+
+## model diagnostics ----
+AIC(HARModel1)
+BIC(HARModel1)
 
 
 ## generic -------
