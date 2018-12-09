@@ -6,6 +6,7 @@ library(readxl)
 library(tseries)
 library(xts)
 library(highfrequency)
+library(PerformanceAnalytics)
 
 library(VIXVolatility)
 
@@ -41,11 +42,18 @@ my_plan <- drake_plan(
 
   # regress data and save plot
   lm1 = regress_data_harvix1(Df, file_out("written/tables/regression_harvix.tex")),
-  lm2 = regress_data_harvixln1(Df, file_out("written/tables/regression_harvixln.tex"))
+  lm2 = regress_data_harvixln1(Df, file_out("written/tables/regression_harvixln.tex")),
 
   # graphical exploration of time series data
 
   # HAR-RV model
+  HARModel1 = harModel(Df_full$Returns, periods = c(1,5,22), RVest = c("rCov"), type = "HARRV"),
+
+  # model diagnostics
+  ListOfModels = list(lm1[[1]], lm1[[2]], lm2[[1]], lm2[[2]], HARModel1),
+  ModelNames = c("OLS", "OLS with VIX", "log OLS", "log OLS with VIX", "HAR-RV"),
+  TableBICAIC = CalculateBICandAIC(ListOfModels,ModelNames)
+
 
 )
 
