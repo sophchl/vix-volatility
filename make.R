@@ -2,12 +2,11 @@ library(usethis)
 library(devtools)
 library(drake)
 library(tidyverse)
-library(VIXVolatility)
+library(readxl)
+library(tseries)
+library(xts)
 
-# library(readxl)
-# library(tseries)
-# library(astsa)
-# ibrary(xts)
+library(VIXVolatility)
 
 pkgconfig::set_config("drake::strings_in_dots" = "literals")
 
@@ -24,7 +23,7 @@ my_plan <- drake_plan(
   SP_raw = read_excel(file_in("data-raw/sandp500.xls"), range = "A767:D8197", col_names = FALSE),
 
   # clean data
-  Vol = Clean_VolA(Vol_raw),
+  Vol = Clean_Vol(Vol_raw),
   Vix1 =  Clean_Vix(Vix1_raw),
   Vix2 = Clean_Vix(Vix2_raw),
   SP = Clean_SP(SP_raw),
@@ -35,13 +34,13 @@ my_plan <- drake_plan(
   # plot data and save plot
   plot_var = plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
   plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
-  plot_sp_and_vix = plot_data2a(Df_frame, "SPandViX.png"),
+  plot_sp_and_vix = plot_data2(Df_frame, "SPandViX.png"),
   plot_sp_and_vol_and_vix = plot_data3(Df_frame, "SPandVolandViX.png"),
   plot_vol_and_vix = plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
-  lm1 = regress_data_harvix2(Df, file_out("written/tables/regression_harvix.tex")),
-  lm2 = regress_data_harvixln2(Df, file_out("written/tables/regression_harvixln.tex"))
+  lm1 = regress_data_harvix(Df, file_out("written/tables/regression_harvix.tex")),
+  lm2 = regress_data_harvixln(Df, file_out("written/tables/regression_harvixln.tex"))
 
   # graphical exploration of time series data
 

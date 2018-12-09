@@ -9,9 +9,9 @@
 #' @examples
 #' regress_data(Df, "example.tex")
 #'
-regress_data_harvix2 <- function(Df, outfile) {
-  lm1 <- lm(Df$RealizedVolatility ~ Df$RealizedVolatility %>% lag(1) + Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVolatility %>% rollapply(20,mean,na.rm = T) %>% lag(1))
-  lm2 <- lm(Df$RealizedVolatility ~ Df$RealizedVolatility %>% lag(1) + Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVolatility %>% rollapply(20,mean,na.rm = T) %>% lag(1) + Df$VIX.Close)
+regress_data_harvix <- function(Df, outfile) {
+  lm1 <- lm(Df$RealizedVolatility ~ Df$RealizedVolatility %>% lag(1) + Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVolatility %>% rollapply(22,mean,na.rm = T) %>% lag(1))
+  lm2 <- lm(Df$RealizedVolatility ~ Df$RealizedVolatility %>% lag(1) + Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVolatility %>% rollapply(22,mean,na.rm = T) %>% lag(1) + Df$VIX.Close)
   texreg::texreg(l=list(lm1,lm2), file = outfile, custom.model.names = c("Historic","Historic and VIX"), custom.coef.names=c("Intercept", "$RV_{t}^{d}$", "$RV_{t}^{w}$", "$RV_{t}^{m}$","VIX"), table = FALSE)
 }
 
@@ -27,9 +27,9 @@ regress_data_harvix2 <- function(Df, outfile) {
 #' @examples
 #' regress_data(Df, "example.tex")
 #'
-regress_data_harvixln2 <- function(df, outfile) {
-  lm3 <- lm(Df$RealizedVolatility %>% log() ~ Df$RealizedVolatility %>% lag(1) %>% log() + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(5,mean,na.rm = T) + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(20,mean,na.rm = T))
-  lm4 <- lm(Df$RealizedVolatility %>% log() ~ Df$RealizedVolatility %>% lag(1) %>% log() + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(5,mean,na.rm = T) + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(20,mean,na.rm = T) + Df$VIX.Close %>% log())
+regress_data_harvixln <- function(df, outfile) {
+  lm3 <- lm(Df$RealizedVolatility %>% log() ~ Df$RealizedVolatility %>% lag(1) %>% log() + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(5,mean,na.rm = T) + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(22,mean,na.rm = T))
+  lm4 <- lm(Df$RealizedVolatility %>% log() ~ Df$RealizedVolatility %>% lag(1) %>% log() + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(5,mean,na.rm = T) + Df$RealizedVolatility %>% lag(1) %>% log() %>% rollapply(22,mean,na.rm = T) + Df$VIX.Close %>% log())
   texreg::texreg(l=list(lm3,lm4), file = outfile, custom.model.names = c("Historic","Historic and VIX"), custom.coef.names=c("Intercept", "$RV_{t}^{d}$", "$RV_{t}^{w}$", "$RV_{t}^{m}$","VIX"), table = FALSE)
 }
 

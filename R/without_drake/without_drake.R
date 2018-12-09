@@ -90,26 +90,39 @@ period.apply(Df$RealizedVolatility,INDEX=ep2,FUN=mean)
 # check for stationarity: decompose time series
 # stationarity: mean is constant over time, variance does not increase over time, seasonality effect is minimal
 
-decompose(Df_full, type = "mult") # soll Zeitreihe in Trend, Saison und irreguläre Komponente zerlegen
+decompose(Df_full, type = "mult") # should decompose time series in trend, season and irregular component
 decompose(log(Df$SP500))
 
 # seasonal decomposition
 stl(log(Df_full$RealizedVolatility), s.window="months")
 stl(Df$SP500)
 
+# cound not find a seasonality with both tests
+
+# p-value: probability, that when the H0 is true, this statistical summary or more extreme values would be observed
 # check stationarity with augmented dickey fuller test
 adf.test(na.omit(Df$RealizedVolatility)) # looks stationary (reject H0 that it is not stationary)
 adf.test(Df$SP500) # does not look stationary (can not reject H0 that it is stationary)
 adf.test(Df$VIX.Close) # looks stationary (reject H0 that it is not stationary)
-adf.test(log(Df$SP500)) # not statioary either
+adf.test(na.omit(diff(log(Df$SP500)))) # difference (stabilize trend) of log (stabilize variance) is stationary
+rollapply(data= Df$RealizedVolatility,width = 900 ,FUN = mean,na.rm = T) %>% range(na.rm =T) # range of mean is pretty large
 
 # plot ACF and PACF
-# PACF: correlation between a variable and a lag of itself that is not explained by correlations at all lower-order-lags.
+# PACF: correlation between a variable and a lag of itself that is not explained by correlations at all lower-order-lags (lower-order: close to time t)
 acf(Df_full)
 pacf(Df_full)
-pacf(Df_full$RealizedVolatility)
+acf(Df_full$RealizedVolatility) # tail off
+pacf(Df_full$RealizedVolatility) # cutt off around 9
+Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% na.omit() %>% acf
 Df$RealizedVolatility %>% rollapply(5,mean,na.rm = T) %>% na.omit() %>% pacf
+Df$RealizedVolatility %>% rollapply(20,mean,na.rm = T) %>% na.omit() %>% acf
 Df$RealizedVolatility %>% rollapply(20,mean,na.rm = T) %>% na.omit() %>% pacf
+
+# plot, take into account trend and seasonality
+plot(Df$SP500)
+plot(log(Df$SP500))
+plot(diff(log(Df$SP500))) # quasi log(1+r) -> should be distributed log-normally
+plot(density(na.omit(diff(log(Df$SP500)))))
 
 
 ## regress data -------------------------------
@@ -129,6 +142,27 @@ lm1b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVar
 summary(lm1b)
 lm2b <- lm(Df$RealizedVariance ~ Df$RealizedVariance %>% lag(1) + Df$RealizedVariance %>% rollapply(5,mean,na.rm = T) %>% lag(1) + Df$RealizedVariance %>% rollapply(20,mean,na.rm = T) %>% lag(1) + Df$VIX.Close %>% lag(1))
 summary(lm2b)
+
+
+## HAR-RV model  ----------
+
+## in order to fit an AR model, the data has to be stationary -> augmented dickey fuller test pointed to stationarity
+
+# determine the order of the lags: look at ACF and PACF
+
+# in time series observation, I found out
+
+ARModel <- ar(Df_full, aic = TRUE, order.max = NULL,
+              method = "yule-walker")
+
+ARModel2 <- sarima(Df_full$RealizedVolatility, 1,0,0) #1 = AR order, 0 = differince order, 0 = MA order
+# I have super high residual correlation with AR(1)
+ARModel2$ttable
+
+Df$RealizedVariance <- Df$RealizedVolatility * Df$RealizedVolatility
+Df_full <- na.omit(Df)
+HARModel1 <- harModel(Df_full$RealizedVariance, periods = c(1,5,22), RVest = c("rCov"), type = "HARRV")
+HARModel1 %>% summary()
 
 
 ## generic -------
