@@ -1,14 +1,25 @@
 %!TEX root = ../Main.tex
 
-\section{Selected models of volatility measurement}
+\section{Selected volatility concepts and models of volatility measurement}
+This section presents first some stylized facts of financial data, and gives both an introduction to the different ways to estimate volatility. By pointing out the advantages and disadvantages of the concepts and models and their fit to the stylized facts, the variables and model used for this paper shall be introduced. This leads to the conclusion, that HAR-RV is the model that should be used for this work.
 
-There are different models for the measurement and estimation of volatility. According to \citeauthor{andersen2001} then shall be grouped in \begin{quote}
-(i) the notional volatility corresponding to the ex-post sample-path return variability over a fixed time interval, (ii) the ex-ante expected volatility over a fixed time interval or the (iii) the instantaneous volatility corresponding to the strength of the volatility process at a point in time.
-\end{quote}
-After a short section about the stylized facts of financial data, the different methods should be quickly presented, including how well they fit to the stylized facts. This leads to the conclusion, why HAR-RV is the model that should be used for this work.
+To measure volatility, one can separate between parametric and non-parametric methods, where parametric models are both discrete and continuous time methods. For an encompassing overview, please see \citeauthor{andersen2001}. 
 
 
-\subsection{Stylized Facts of Financial Data}
+\subsection{The Return Process and Stylized Facts of Financial Data}
+As mentioned in the introduction, the challenge when measuring volatility is, that there are various definitions of asset volatility and for stocks the return volatility is not directly observable \parencite{tsay2005}. This problem evolves from the fact that we can only observe one realization of the stochastic process generation stock prices, and even though stocks are traded and thus have market prices which could be used for volatility measurement, there is no continuous data available and it is always only possible to estimate volatility for a given period of time.\\
+There are however several approaches that should be introduced here. To start with, the definition of the simple gross return:
+\begin{align}\label{eq:return}
+1+ R_{t} = \frac{P_{t}}{P_{t-1}} 
+\end{align}
+In the continuous-time setting, we use continuously compounded returns, given by
+\begin{align*}
+r_{t} = ln(1 + R_{t}) = ln (\frac{P_{t}}{P_{t}} + \frac{P_{t-1} - P_{t}}{P_{t}}) = 
+ln \frac{P_{t}}{P_{t-1}} = p_{t} - p_{t-1}\\
+with\  p_{t} = ln(P_{t})
+\end{align*}
+
+
 
 \citeauthor{andersen2001} found three stylized facts for the spot exchange rate market. First even though raw returns have a leptocurtic distribution, the returns standardized by realized volatility are approximately Gaussian. Second, the distribution of realized volatility of returns itself is right skewed, the one of the logarithms of realized volatility however are also approximately Gaussian. Third, the long-run dynamics of realized logarithmic volatilities are well approximated by a fractionally-integrated long-memory process. 
 
@@ -22,20 +33,38 @@ This stylized facts motivate the use of the HAR-RV model.
 \item 
 \end{itemize}
 
-\subsection{Models Using Historic Volatility}
-\subsubsection{The General Idea of Historic Volatility}
-\begin{itemize}\itemsep0pt
-\item historic volatility: just lagged realized volatility
-\item econometric models: GARCH (as an example for a frequently used one)
-\end{itemize}	
 
-\subsubsection{HAR-RV Model}
+
+\subsection{Concepts and Models using Historic Volatility}
+\subsubsection{Volatility Concept - Realized Volatility}
+
+
+In order to measure the information content of the VIX implied volatility our model needs a dependent variable. There are multiple different volatility concepts, which can serve the measuring and modelling volatility and according to \citeauthor{andersen2001} can be grouped in (i) the notional volatility corresponding to the ex-post sample-path return variability over a fixed time interval, (ii) the ex-ante expected volatility over a fixed time interval or the (iii) the instantaneous volatility corresponding to the strength of the volatility process at a point in time.
+For this paper, given the dataset of actual return observations, one can compute the ex-post realized volatility.\\
+It can be shown, that under some assumptions, realized volatility as the sum of squared high frequency returns, can be used to approximate the quadratic variation process which is the variation in a continuous time setting. This approach mainly building on the work of \citeauthor{andersen2001} und [noch jemanden finden] shall be briefly reproduced here. \\
+To begin with, it should be assumed that we have a continuous-time no-arbitrage setting. By definition, return volatility aims to capture the strength of the unexpected return variation (the component of a price change as opposed to an expected price movement) over time. To identify the unexpected component can be done with discrete time assumption, by specifying the conditional mean return using for example an asset pricing model. In the continuous time setting this requires the decomposition of the return process in an expected and innovation component. \\
+A comfortable feature of the continuously compounded returns, is that they are time additive, meaning
+\begin{align*}
+r(t,h) = r(t) - r(t-h) \ with \ 0 \leq h \leq t \leq T.
+\end{align*}
+Assuming, that the asset prices are positive and finite, both price and return are defined in the interval [0,T] and as a consequence, r(t) has only countable many jump points in [0,T]. \\
+Assuming furthermore that the return process is a càdlàg process, that there are no arbitrage opportunities and frictions and  that the expected return is finite, then the log-price process must constitute a semi-martingale. This leads to the following decomposition of the instantaneous return, into an expected return component and a martingale innovation
+\begin{align*}
+r(t) = p(t) - p(0) = \mu(t) + M(t) = \mu(t) + M^{c}(t) + M^{j}(t)
+\end{align*}
+where $\mu(t)$ is a predictable and finite variation process, $M(t)$ is a local martingale which may be further decomposed into $M^{c}(t)$, a continuous sample path, infinite variation local martingale component, and $M^{j}(t)$, a compensated jump martingale.\\
+Unfortunately, instantaneous returns can not be observed, and even in liquid markets microstructure effects distort the observation of an even closely continuous sample-path realization. Consequently this decomposition has to be transferred to the discrete interval setting. This is slightly complex, and for this work shall only be constituted, that that in discrete time there are two distinct terms in the return innovation instead of one, however one of these terms is a martingale component, too, and this is the dominant part. \\
+
+
+
+
+\subsubsection{Volatility Measurement - HAR-RV Model}
 
 Also \citeauthor{andersen2003} point out the advantage of using high-frequency returns is not only that they help predicting again high-frequency returns, but also that they contain information for longer horizons, such as monthly or quarterly. 
 
 
 \subsection{Implied volatility}
-\subsubsection{Black-and-Scholes Implied Volatility}
+\subsubsection{The General Idea of Implied Volatility}
 \begin{itemize}\itemsep0pt
 \item explain basic idea of BS implied volatility
 \item advantages of BS implied volatility: forward-looking nature of option prices
