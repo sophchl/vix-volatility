@@ -2,7 +2,20 @@
 
 \section{Selected models of volatility measurement}
 
+There are different models for the measurement and estimation of volatility. According to \citeauthor{andersen2001} then shall be grouped in \begin{quote}
+(i) the notional volatility corresponding to the ex-post sample-path return variability over a fixed time interval, (ii) the ex-ante expected volatility over a fixed time interval or the (iii) the instantaneous volatility corresponding to the strength of the volatility process at a point in time.
+\end{quote}
+After a short section about the stylized facts of financial data, the different methods should be quickly presented, including how well they fit to the stylized facts. This leads to the conclusion, why HAR-RV is the model that should be used for this work.
+
+
 \subsection{Stylized Facts of Financial Data}
+
+\citeauthor{andersen2001} found three stylized facts for the spot exchange rate market. First even though raw returns have a leptocurtic distribution, the returns standardized by realized volatility are approximately Gaussian. Second, the distribution of realized volatility of returns itself is right skewed, the one of the logarithms of realized volatility however are also approximately Gaussian. Third, the long-run dynamics of realized logarithmic volatilities are well approximated by a fractionally-integrated long-memory process. 
+
+Financial asset return volatility is time-varying,  not only across time-periods, but also across asset classes, assets and countries \parencite{andersen2001}.
+
+This stylized facts motivate the use of the HAR-RV model.
+
 \begin{itemize}
 \item strong persistence of the autocorrelation of square and absolute returns \parencite{jiang2003}
 \item return distributions exhibits both fat tails and tail crossover \parencite{jiang2003}
@@ -10,10 +23,16 @@
 \end{itemize}
 
 \subsection{Models Using Historic Volatility}
+\subsubsection{The General Idea of Historic Volatility}
 \begin{itemize}\itemsep0pt
 \item historic volatility: just lagged realized volatility
 \item econometric models: GARCH (as an example for a frequently used one)
-\end{itemize}
+\end{itemize}	
+
+\subsubsection{HAR-RV Model}
+
+Also \citeauthor{andersen2003} point out the advantage of using high-frequency returns is not only that they help predicting again high-frequency returns, but also that they contain information for longer horizons, such as monthly or quarterly. 
+
 
 \subsection{Implied volatility}
 \subsubsection{Black-and-Scholes Implied Volatility}
