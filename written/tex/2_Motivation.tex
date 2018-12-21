@@ -11,36 +11,53 @@ There are however several approaches that should be introduced here. To start wi
 1+ R_{t} = \frac{P_{t}}{P_{t-1}} 
 \end{align}
 In the continuous-time setting, continuously compounded returns are used, which are given by
-\begin{align*}
+\begin{align}\label{eq:log-return}
 r_{t} = ln(1 + R_{t}) = ln (\frac{P_{t}}{P_{t}} + \frac{P_{t-1} - P_{t}}{P_{t}}) = 
 ln \frac{P_{t}}{P_{t-1}} = p_{t} - p_{t-1} \ 
 with\  p_{t} = ln(P_{t})
-\end{align*}
-
+\end{align}
 When observed over time, this asset returns show some distributional properties, often referred to as stylized facts of asset returns. Observed by many authors, only a few shall be mentioned here. \citeauthor{corsi2009} for example mentions particularly the very strong persistence of autocorrelation of the square and absolute returns, which regularly poses challenges to econometric models. Moreover return probability density functions are often leptocurtic with fat tails. As the time scale increases, the return distribution slowly converge to the normal distribution, but before convergence, the return distribution has different shapes depending on the time scale. Financial data also show evidence of scaling as described firstly by Mandelbrot, which is connected to the idea that patterns appear in different times, or that the distribution for returns has similar functional forms for various choices of the time interval. \\
 Moreover \citeauthor{andersen2001} mentions that first, even though raw returns have a leptocurtic distribution, the returns standardized by realized volatility are approximately Gaussian. Second, the distribution of realized volatility of returns itself is right skewed, the one of the logarithms of realized volatility however are also approximately Gaussian. Third, the long-run dynamics of realized logarithmic volatilities are well approximated by a fractionally-integrated long-memory process. Other authors who mention stylized facts: \parencite{jiang2003}.
 
 \subsection{Concepts and Models using Historic Volatility}
-\subsubsection{Volatility Concept - Realized Volatility}
+\subsubsection{Volatility Concept and Non-parametric ex-post Volatility Measurement - Realized Volatility}
 By definition ``volatility seeks to capture the strength of the (unexpected) return variation over a given period of time'' \parencite[p.7]{andersen2001}. However, there are multiple concepts and definitions of asset volatility. According to \citeauthor{andersen2001} the concepts can be grouped in (i) the \emph{notional volatility} corresponding to the ex-post sample-path return variability over a fixed time interval, (ii) the ex-ante \emph{expected volatility} over a fixed time interval or the (iii) the \emph{instantaneous volatility} corresponding to the strength of the volatility process at a point in time.
 For this paper, given the dataset of actual return observations, one can compute the ex-post realized volatility.\\
 It can be shown, that under some assumptions, realized volatility as the sum of squared high frequency returns, can be used to approximate the quadratic variation process which is the variation in a continuous time setting. This approach mainly building on the work of \citeauthor{andersen2001} und [noch jemanden finden] shall only be briefly introduced here. \\
-To begin with, it should be assumed that we have a continuous-time no-arbitrage setting. As return volatility aims to capture the strength of the unexpected return variation, one needs to define the component of a price change as opposed to an expected price movement. In discrete time this can be done by specifying the conditional mean return using for example an asset pricing model. In the continuous time setting however it requires the decomposition of the return process in an expected and innovation component. \citeauthor{andersen2001} show, that under certain assumptions the log-price process must constitute a semi-martingale process, which allows for the decomposition of the instantaneous return process into an expected return component, and a martingale innovation. To estimate volatility, \citeauthor{andersen2001} show furthermore, that one can refer to the quadratic variation process of this martingale component for volatility measurement, as the quadratic variation process represents the (cumulative) realized sample path variability of the martingale over any fixed interval \parencite{andersen2001}. For the purpose of this paper it shall only be said, that quadratic variation is... . To be precise, they define the notional (ex-post) volatility as the increment to the quadratic variation for the return series. They also state, that this increment to quadratic variation can be consistently and well approximated through the accumulation of high-frequency squared returns.
+To begin with, it should be assumed that we have a continuous-time no-arbitrage setting. As return volatility aims to capture the strength of the unexpected return variation, one needs to define the component of a price change as opposed to an expected price movement. In discrete time this can be done by specifying the conditional mean return using for example an asset pricing model. In the continuous time setting however it requires the decomposition of the return process in an expected and innovation component. \citeauthor{andersen2001} show, that under certain assumptions the log-price process must constitute a semi-martingale process, which allows for the decomposition of the instantaneous return process into an expected return component, and a martingale innovation. They show furthermore, that one can refer to the quadratic variation process of this martingale component as a volatility measure, as the quadratic variation process represents the (cumulative) realized sample path variability of the martingale over any fixed time interval. To be precise, they define \emph{notional volatility} as the increment to the quadratic variation for the return series, measured ex-post.\\
+Assuming that the mean of the return process is zero, taking the expected value of the notional volatility and extending this concept slightly, one gets the \emph{realized volatility}, defined over the $[t-h,t], 0 < h \leq t \leq T$ time interval as
+\begin{align}\label{eq:RV-andersen}
+v^2(t,h;n) = \sum_{i=1}^{n} r(t-h+(i/n) \times h,h/n)^2
+\end{align}
+\citeauthor{andersen2001} show not only that the realized volatility is an \emph{unbiased} estimator of ex-ante expected volatility, or at least approximately unbiased when relaxing the zero mean assumption and taking a high sample frequency (their proposition 4). Moreover, \citeauthor{andersen2001} show that the realized volatility is a \emph{consistent} nonparametric measure of the notional volatility for increasingly finely sampled returns over any fixed length interval (their proposition 5). So in summary, the increment to the quadratic return variation and thus past volatility can be consistently and well approximated through the accumulation of high-frequency squared returns.\\
 
-
-For this paper, this approximation of notional volatility shall be termed \emph{realized volatility}.
-
+For the purpose of this paper it shall only be said, that quadratic variation is... .  
 
 
 \subsubsection{Volatility Model - HAR-RV Model}
+Having introduced the concept of notional volatility and it's approximation by realized volatility, we now turn to volatility modelling/measurement. To measure volatility, one can separate between parametric and non-parametric methods. Whereas parametric methods try to measure the expected volatility making different assumptions about both the functional form and the variables in the information set available, non-parametric methods try to quantify notional volatility directly. The realized volatility is an example for a non-parametric methods. However, to forecast or estimate volatility ex-ante, this paper will refer to one type of the parametric methods, termed the HAR-RV model.\\
+As mentioned in the section above, the logreturn process can be decomposed in a predictable and finite variation process, and a local martingale. \citeauthor{corsi2009}, does so by assuming the standard continuous time diffusion process:
+\begin{align}\label{eq:return-process-corsi}
+dp_{t} = \mu (d) dt + \sigma_{t} dW_{t}
+\end{align}
+with $p(t)$ being the logarithm of the instantaneous price, $\mu (t)$ a cadlág finite variation process, $W (t)$ a standard Brownian motion, and $\sigma (t)$ a stochastic process independent of $W_{p,t}$.\\
+As in \citeauthor{andersen2001} they approximate the instantaneous/notional variance with the sum of squared returns, but term not this variance as volatility, but it's square root. This terminology should also be used for the remainder of this paper, with the realized volatility for one trading day being then:
+\begin{align}
+RV_{t}^{(d)} = \sqrt{\sum_{j=0}^{M-1} r^{2}_t-j \times \Delta}
+\end{align}
+with $\Delta = 1d/M$ being the sampling frequency and $r^{2}_t-j \times \Delta$ defined as the continuously compounded $Delta$-frequency returns. \\
+Combining this notion of volatility with the Heterogeneous Market Hypothesis by \citeauthor{mueller1993}. This 
 
-To measure volatility, one can separate between parametric and non-parametric methods, where parametric models are both discrete and continuous time methods. For an encompassing overview, please see \citeauthor{andersen2001}. 
+
 
 Also \citeauthor{andersen2003} point out the advantage of using high-frequency returns is not only that they help predicting again high-frequency returns, but also that they contain information for longer horizons, such as monthly or quarterly. 
 
 
 \subsection{Implied volatility}
 \subsubsection{The General Idea of Implied Volatility}
+\citeauthor{andersen2001} define \emph{implied volatility} as consisting of a parametric volatility model for returns, accompanied by an asset pricing model and an augmented information set, including also option prices. Having the derivative prices, it is possible to extract a value for the expected volatility, by inverting the theoretical asset pricing model. It is however important to note, that all of these procedures depend on the assumptions that are made in the asset pricing model \parencite{andersen2001}. 
+
+
 \begin{itemize}\itemsep0pt
 \item explain basic idea of BS implied volatility
 \item advantages of BS implied volatility: forward-looking nature of option prices
