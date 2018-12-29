@@ -54,7 +54,7 @@ Clean_Vix <- function(infile) {
   colnames(Vix2) <- c("Date", "VIX.Close") # rename columns
   Vix2$Date <- as.Date(Vix2$Date, format = "%m/%d/%Y") # turn Date into appropriate time-based object
   Vix2$VIX.Close <- as.numeric(as.character(Vix2$VIX.Close)) # turn Close into numeric
-  Vix2$VIX.Close <- Vix2$VIX.Close/sqrt(360) # turn from annualized to daily
+  Vix2$VIX.Close <- Vix2$VIX.Close/sqrt(252) # turn from annualized to daily
   return(Vix2)
 }
 
