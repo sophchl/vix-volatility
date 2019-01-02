@@ -8,6 +8,7 @@ library(xts)
 library(highfrequency)
 library(PerformanceAnalytics)
 library(xtable)
+library(HARModel)
 
 library(VIXVolatility)
 
@@ -27,23 +28,23 @@ my_plan <- drake_plan(
 
   # clean data
   Vol = Clean_Vol(Vol_raw),
-  Vix1 =  Clean_Vix(Vix1_raw),
-  Vix2 = Clean_Vix(Vix2_raw),
+  Vix1 =  Clean_Vix1(Vix1_raw),
+  Vix2 = Clean_Vix2(Vix2_raw),
   SP = Clean_SP(SP_raw),
-  Df = Build_df(Vix1, Vix2, Vol, SP),
+  Df = Build_df1(Vix1, Vix2, Vol, SP),
   Df_frame = Build_df2(Vix1, Vix2, Vol, SP),
   Df_full = na.omit(Df),
 
   # plot data and save plot
-  plot_var = plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
-  plot_vix = plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
-  plot_sp_and_vix = plot_data2(Df_frame, "SPandViX.png"),
-  plot_sp_and_vol_and_vix = plot_data3(Df_frame, "SPandVolandViX.png"),
-  plot_vol_and_vix = plot_data4(Df_frame,"VolandViX.png"),
+  plot_var = Plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
+  plot_vix = Plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
+  plot_sp_and_vix = Plot_data2(Df_frame, "SPandViX.png"),
+  plot_sp_and_vol_and_vix = Plot_data3(Df_frame, "SPandVolandViX.png"),
+  plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
-  lm1 = regress_data_harvix1(Df, file_out("written/tables/regression_harvix.tex")),
-  lm2 = regress_data_harvixln1(Df, file_out("written/tables/regression_harvixln.tex")),
+  lm1 = Regress_data_harvix1(Df, file_out("written/tables/regression_harvix.tex")),
+  lm2 = Regress_data_harvixln(Df, file_out("written/tables/regression_harvixln.tex")),
 
   # graphical exploration of time series data
 
@@ -63,6 +64,7 @@ vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame, Df_full))
 loadd(c(lm1,lm2))
+
 
 # rm(list = ls())
 
