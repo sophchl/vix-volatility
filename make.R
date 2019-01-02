@@ -40,10 +40,10 @@ my_plan <- drake_plan(
   plot_vix = Plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
   plot_sp_and_vix = Plot_data2(Df_frame, "SPandViX.png"),
   plot_sp_and_vol_and_vix = Plot_data3(Df_frame, "SPandVolandViX.png"),
-  plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
+  plot_vol_and_vix = plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
-  lm1 = Regress_data_harvix1(Df, file_out("written/tables/regression_harvix.tex")),
+  lm1 = Regress_data_harvix(Df, file_out("written/tables/regression_harvix.tex")),
   lm2 = Regress_data_harvixln(Df, file_out("written/tables/regression_harvixln.tex")),
 
   # graphical exploration of time series data
