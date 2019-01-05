@@ -3,6 +3,8 @@
 \section{Methodology and Data}
 
 \subsection{Data and Calculation of Input Factors}
+The data used in this study are from several sources. The realized variance of the S\&P 500 .. . Then write about what data adjustments were made, including the ones already done with oxford realized library.
+
 Also \citeauthor{andersen2003} point out the advantage of using high-frequency returns is not only that they help predicting again high-frequency returns, but also that they contain information for longer horizons, such as monthly or quarterly. 
 Graphics
 
@@ -11,17 +13,13 @@ VIX is the daily implied volatility index, calculated from the annualized volati
 For an analysis of the historic values of the VIX, see \textcite{whaley2008} (chapter: historix, normal range). 
 
 
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/vix.png}
-%\end{figure}
-%
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/vol.png}
-%\end{figure}
-%
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/SPandVolandViX.png}
-%\end{figure}
+\begin{figure}[!htbp]
+\includegraphics[width=16cm, height=8cm]{pictures/SPandViX.png}
+\end{figure}
+
+\begin{figure}[!htbp]
+\includegraphics[width=16cm, height=8cm]{pictures/SPandVolandViX.png}
+\end{figure}
 
 Measure for daily return variability should be realized volatility, as \citeauthor{andersen2001} suggest, that under suitable conditions it provides an unbiased estimator of the return volatility. 
 
@@ -36,53 +34,12 @@ Measure for daily return variability should be realized volatility, as \citeauth
 
 
 \subsection{Methodology: Linear Regression and HAR-RV model}
-\begin{itemize}\itemsep0pt
-\item Reg1: without VIX
-\begin{itemize}\itemsep0pt
-\item Reg1a: regress realized volatility on historic volatility using simple linear regression
-\item Reg1b: regress realized volatility on historic volatility using HAR-RV model
-\end{itemize}
-\item Reg2: with VIX
-\begin{itemize}
-\item Reg2b: regress realized volatility on historic volatility using simple linear regression
-\item Reg2b: regress realized volatility on historic volatility using HAR-RV model
-\end{itemize}
-\end{itemize}
-%
-\begin{flalign}
-&\sigma_{t,x}^{RV} = \alpha_{x,t} + \beta_{x,t}^{HV} \sigma_{x,t}^{HV}\\
-&\sigma_{x,t}^{RV} = \alpha_{x,t} + \beta_{x,t}^{HV,d} \sigma_{x,t}^{HV,d} + \beta_{x,t}^{HV,w} \sigma_{x,t}^{HV,w} + \beta_{x,t}^{HV,m} \sigma_{x,t}^{HV,m}\\
-&\sigma_{x,t}^{RV} = \alpha_{x,t} + \beta_{x,t}^{HV} \sigma_{x,t}^{HV} + \beta_{x,t}^{VIX} + \sigma^{VIX}_{x,t}\\
-&\sigma_{x,t}^{RV} = \alpha_{x,t} + \beta_{x,t}^{HV,d} \sigma_{x,t}^{HV,d} + \beta_{x,t}^{HV,w} \sigma_{x,t}^{HV,w} + \beta_{x,t}^{HV,m} \sigma_{x,t}^{HV,m} + \beta_{x,t}^{VIX} + \sigma^{VIX}_{x,t}
-\end{flalign}
-
-\subsection{Data and Calculation of Input Factors}
-Also \citeauthor{andersen2003} point out the advantage of using high-frequency returns is not only that they help predicting again high-frequency returns, but also that they contain information for longer horizons, such as monthly or quarterly. 
-Graphics
-
-
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/vix.png}
-%\end{figure}
-%
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/vol.png}
-%\end{figure}
-%
-%\begin{figure}[!htbp]
-%\includegraphics[width=16cm, height=8cm]{pictures/SPandVolandViX.png}
-%\end{figure}
-
-Measure for daily return variability should be realized volatility, as \citeauthor{andersen2001} suggest, that under suitable conditions it provides an unbiased estimator of the return volatility. 
-
-
-\begin{itemize}\itemsep0pt
-\item S\&P 500 index data on daily basis
-\item sampling period: 2000 - 2018
-\item realized volatility: daily realized volatility of S\&P 500, calculated using 5 minute returns, retrieved from \citeauthor{heber2009}
-\item model-free implied volatility: VIX index data
-\item historic volatility: lagged realized volatility, for HAR-RV model use the average over the time period used to forecast
-\end{itemize}
+Consistent with prior research, for example \textcite{jiang2003}, \textcite{canina1993} or \textcite{christensen1998}, both univariate and encompassing regression analysis is used to analyse the information content of volatility measures. In the univariate regression, the realized volatility is only regressed on the historic data. For comparison, realized volatility is regressed on both historic data and the VIX in the encompassing regression analysis. Thus the encompassing regression analysis gives information about the relative importance of the volatility measures, and whether the VIX as one of them subsumes the information from the historic volatility. The two regressions are then given by:
+\begin{align}
+RV_{t+1d} = c + \beta^{d} RV^{d}_{t} + \beta^{w} RV^{w}_{t} + \beta^{m} RV^{m}_{t}  \\
+RV_{t+1d} = c + \beta^{d} RV^{d}_{t} + \beta^{w} RV^{w}_{t} + \beta^{m} RV^{m}_{t} + \beta^{VIX} VIX
+\end{align}
+with .. (explain variables again?). In alignment with \textcite{corsi2009}, the Newey-West covariance correction is used, to account for the possible presence of serial correlation in the data, as serial correlation causes both the Gauss-Markow and Classical linear model assumptions to fail. 
 
 
 \subsection{Limitations}

@@ -9,6 +9,10 @@ library(highfrequency)
 library(PerformanceAnalytics)
 library(xtable)
 library(HARModel)
+library(sandwich)
+library(lubridate)
+library(lmtest)
+library(stargazer)
 
 library(VIXVolatility)
 
@@ -43,18 +47,7 @@ my_plan <- drake_plan(
   plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
 
   # regress data and save plot
-  lm1 = Regress_data_harvix(Df, file_out("written/tables/regression_harvix.tex")),
-  lm2 = Regress_data_harvixln(Df, file_out("written/tables/regression_harvixln.tex")),
-
-  # graphical exploration of time series data
-
-  # HAR-RV model
-  HARModel1 = harModel(Df_full$Returns, periods = c(1,5,22), RVest = c("rCov"), type = "HARRV"),
-
-  # model diagnostics
-  ListOfModels = list(lm1[[1]], lm1[[2]], lm2[[1]], lm2[[2]], HARModel1),
-  ModelNames = c("OLS", "OLS with VIX", "log OLS", "log OLS with VIX", "HAR-RV"),
-  TableBICAIC = CalculateBICandAIC(ListOfModels,ModelNames)
+  lm1 = Regress_data_newey(Df)
 
 
 )
@@ -63,15 +56,11 @@ make(my_plan)
 vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame, Df_full))
-loadd(c(lm1,lm2))
+loadd(lm1)
+lm1[[1]] %>% summary()
 
 
 # rm(list = ls())
-
-
-
-
-
 
 ## Merkzettel --------------------------------
 # file_in - Wenn ich Sachen von außerhalb der R umgebung einlese, file_out: wenn ich Sachen abspeichere

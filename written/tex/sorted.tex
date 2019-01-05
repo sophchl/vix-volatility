@@ -31,3 +31,17 @@ r(t) = p(t) - p(0) = \mu(t) + M(t) = \mu(t) + M^{c}(t) + M^{j}(t)
 \end{align*}
 where $\mu(t)$ is a predictable and finite variation process, $M(t)$ is a local martingale which may be further decomposed into $M^{c}(t)$, a continuous sample path, infinite variation local martingale component, and $M^{j}(t)$, a compensated jump martingale.\\
 Unfortunately, instantaneous returns can not be observed, and even in liquid markets microstructure effects distort the observation of an even closely continuous sample-path realization. Consequently this decomposition has to be transferred to the discrete interval setting. This is slightly complex, and for this work shall only be constituted, that that in discrete time there are two distinct terms in the return innovation instead of one, however one of these terms is a martingale component, too, and this is the dominant part. 
+
+\begin{figure}[!htbp]
+\caption{Level-level regression}
+\centering
+\input{tables/regression_harvix.tex}
+\end{figure}
+%
+\begin{figure}[!htbp]
+\caption{log-log regression}
+\centering
+\input{tables/regression_harvixln.tex}
+\end{figure}
+%
+\input{tables/AICandBIC.tex}
