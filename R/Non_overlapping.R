@@ -1,12 +1,19 @@
+#'Create a dataset for the regression containing only the data from wednesday every two weeks (not same option twice in regression)
+#'
+#' @param Data
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' CreateNonOverlapping(Df)
 CreateNonOverlapping <- function(Data) {
-Df_non_overlapping <- Df[which(weekdays(index(Df)) == "Mittwoch")]
-weekdays(index(Df))
+Df_non_overlapping <- Data[which(weekdays(index(Data)) == "Mittwoch")]
+weekdays(index(Data))
 weekdays(index(Df_non_overlapping))
-head(Df_non_overlapping)
 ToDelete <- seq(0, length(Df_non_overlapping), 2)
 Df_non_overlapping <- Df_non_overlapping[-ToDelete,]
-head(Df_non_overlapping)
+return(Df_non_overlapping)
 }
 
-# Regress_data_newey(Df_non_overlapping, "written/tables/overlap1.tex", "written/tables/overlap2.tex")
 

@@ -2,10 +2,11 @@
 #'
 #' @param Data
 #'
-#' @return
+#' @return A dataset with the variables needed, xts object
 #' @export
 #'
 #' @examples
+#' RegressionDataRVVIX(Df)
 RegressionDataRVVIX <- function(Data) {
   Df_regress <- Data
   Df_regress$day <- Df_regress$RealizedVolatility %>% lag(1)

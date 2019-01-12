@@ -49,9 +49,12 @@ my_plan <- drake_plan(
   # descriptive statistics
 
   # regress data and save plot
-  lm1 = Regress_data_newey(Df, "written/tables/newey1.tex", "written/tables/newey2.tex"),
-  lm2 = Regress_data_newey2(Df, "written/tables/newey3.tex", "written/tables/newey4.tex")
-
+  Df_regress = RegressionDataRVVIX(Df),
+  Df_no_overlap = CreateNonOverlapping(Df_regress),
+  lm1 = Regress_data_neweya(Df_regress, "written/tables/newey1.tex", "written/tables/newey2.tex"),
+  lm2 = Regress_data_newey2a(Df_regress, "written/tables/newey3.tex", "written/tables/newey4.tex"),
+  lm3 = Regress_data_neweya(Df_no_overlap, "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
+  lm4 = Regress_data_newey2a(Df_no_overlap, "written/tables/overlap3.tex", "written/tables/overlap4.tex")
 
 )
 

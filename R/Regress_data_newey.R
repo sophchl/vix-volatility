@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-Regress_data_newey <- function(Df_regress, SavePath1, SavePath2) {
+Regress_data_neweya <- function(Df_regress, SavePath1, SavePath2) {
   MyRegression1a <- lm(RealizedVolatility ~ day + week + month + crisis, data = Df_regress)
   MyRegression2a <- lm(RealizedVolatility ~ crisis + VIX.Close %>% lag(1), data = Df_regress)
   MyRegression3a <- lm(RealizedVolatility ~ day + week + month + crisis + VIX.Close %>% lag(1), data = Df_regress)
