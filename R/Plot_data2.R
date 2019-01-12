@@ -16,7 +16,8 @@ Plot_data2 <- function(infile, save_name){
     scale_x_date(breaks = "2 years", date_labels = "%Y") +
     scale_color_manual(values = c("#00AFBB", "#E7B800")) +
     labs(y = "VIX (Close)", x = "Year", color = "Legend") +
-    theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "grey92"), panel.grid.minor = element_line(colour = "grey92"),
-          text = element_text(size = 15), axis.text = element_text(size = 15))
+    theme(legend.position = c(0.8,0.9), panel.grid.major = element_line(colour = "white"), panel.grid.minor = element_line(colour = "white"),
+          text = element_text(size = 15), axis.text = element_text(size = 15), rect = element_rect(fill = "transparent"))
   ggsave(save_name, plot = last_plot(), width = 16, path = "written/pictures")
 }
+
