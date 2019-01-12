@@ -46,8 +46,11 @@ my_plan <- drake_plan(
   plot_sp_and_vol_and_vix = Plot_data3(Df_frame, "SPandVolandViX.png"),
   plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
 
+  # descriptive statistics
+
   # regress data and save plot
-  lm1 = Regress_data_newey(Df)
+  lm1 = Regress_data_newey(Df, "written/tables/newey1.tex", "written/tables/newey2.tex"),
+  lm2 = Regress_data_newey2(Df, "written/tables/newey3.tex", "written/tables/newey4.tex")
 
 
 )
@@ -57,7 +60,7 @@ vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame, Df_full))
 loadd(lm1)
-lm1[[1]] %>% summary()
+lm1[[2]] %>% summary()
 
 
 # rm(list = ls())

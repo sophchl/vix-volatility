@@ -1,20 +1,22 @@
-#' Estimate my 2 models with newey west standard errors and produce latex output
+# same as Regress_data_newey but it inlcudes the same averages for the VIX than for RV
+
+#' Title
 #'
 #' @param Data
 #' @param SavePath1
 #' @param SavePath2
 #'
-#' @return 4 regressions and 2 latex ouput
+#' @return
 #' @export
 #'
 #' @examples
-Regress_data_newey <- function(Df_regress, SavePath1, SavePath2) {
+Regress_data_newey2 <- function(Df_regress, SavePath1, SavePath2) {
   MyRegression1a <- lm(RealizedVolatility ~ day + week + month + crisis, data = Df_regress)
-  MyRegression2a <- lm(RealizedVolatility ~ crisis + VIX.Close %>% lag(1), data = Df_regress)
-  MyRegression3a <- lm(RealizedVolatility ~ day + week + month + crisis + VIX.Close %>% lag(1), data = Df_regress)
+  MyRegression2a <- lm(RealizedVolatility ~ crisis + dayVIX + weekVIX + monthVIX, data = Df_regress)
+  MyRegression3a <- lm(RealizedVolatility ~ day + week + month + crisis + dayVIX + weekVIX + monthVIX, data = Df_regress)
   MyRegression1b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis, data = Df_regress)
-  MyRegression2b <- lm(RealizedVolatility %>% log() ~ crisis + VIX.Close %>% lag(1) %>% log(), data = Df_regress)
-  MyRegression3b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis + VIX.Close  %>% lag(1) %>% log(), data = Df_regress)
+  MyRegression2b <- lm(RealizedVolatility %>% log() ~ crisis + dayVIX %>%  log() + weekVIX %>% log() + monthVIX %>% log(), data = Df_regress)
+  MyRegression3b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis + dayVIX %>%  log() + weekVIX %>% log() + monthVIX %>% log(), data = Df_regress)
   MyNeweyWest1a <- coeftest(MyRegression1a, vcov=NeweyWest(MyRegression1a))
   MyNeweyWest2a <- coeftest(MyRegression2a, vcov=NeweyWest(MyRegression2a))
   MyNeweyWest3a <- coeftest(MyRegression3a, vcov=NeweyWest(MyRegression3a))
