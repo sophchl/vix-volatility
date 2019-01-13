@@ -15,12 +15,16 @@
 	
 \addbibresource{./bib/bibliography.bib} % das entsprechende File muss ebenfalls im entsprechenden Ordner vorhanden sein
 
+\usepackage{glossaries} % abbreviations
+\setacronymstyle{long-short}  
+\newacronym{BS}{BS}{Black-and-Scholes-Merton Model}
+\newacronym{CBOE}{CBOE}{Chicago Board of Options Exchange}
+\newacronym{SPX}{SPX}{S\&P 500}
+
 \makeglossaries
 
 \begin{document}
 
-\newglossaryentry{BS}{name=BS, description={Black-and-Scholes-Merton Model}}
-\newglossaryentry{CBOE}{name=CBOE, description={Chicago Board of Options Exchange}}
 
 	\input{tex/front}
 	\newpage
