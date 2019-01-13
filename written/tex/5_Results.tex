@@ -2,33 +2,33 @@
 
 \section{Results}\label{sec:5Results}
 
-This section presents the results, obtained with the regression analysis described in section \ref{sec:42Method}. 
+This section presents the results, obtained with the regression analysis described in section \ref{sec:42Method}. The estimation results are summarized in \ref{tab:newey1} and \ref{tab:newey2}. First, concerning \textbf{H1}, if the VIX contains information about future volatility, the VIX slope coefficient should be different from zero. The results can not reject this hypothesis, in the univariate regression 
 
 \subsection{Regression Analysis Results}\label{sec:51Regression}
-Table (1) provides the summary statistics for both the realized volatility and the VIX. It can be seen, that for all time periods the VIX is higher than the 
-
-
-
 %
-\input{tables/newey1.tex}
+\input{tables/newey1.tex}\label{tab:newey1}
 %
-\input{tables/newey2.tex}
+\input{tables/newey2.tex}\label{tab:newey2}
 %
-\input{tables/newey3.tex}
+%\input{tables/newey3.tex}\label{tab:newey3}
 %
-\input{tables/newey4.tex}
+%\input{tables/newey4.tex}\label{tab:newey3}
 
 \subsection{Robustness Checks}\label{sec51Robustness}
 
-\subsubsection{Monthly non-overlapping samples}
 
-\input{tables/overlap1.tex}
+\subsubsection{Monthly non-overlapping samples}
+Previous samples testing the information content of (model-free) implied volatility often used overlapping samples, meaning that the same option is used in several implied-volatility calculations. However, \textcite{christensen1998} showed, that the use of overlapping samples creates a telescopic overlap problem and thus standard statistical inferences are no longer valid.\\
+Therefore the same regression analysis was conducted using non-overlapping samples. \textcite{jiang2003} use monthly non-overlapping samples, using the first Wednesday of every month, since they calculate the implied volatility over a horizon on one month. The VIX however is calculated slightly differently. It contains near- and next-term options options between 23 and 37 days to maturity (which is always a Friday), and every week the options roll over to new maturities. For example, taking the second Tuesday in October, the near-term option expires in 24 days, and the next-term option in 31 days. One day later, the option that expires now in 30 days is the near-term option, and another option expiring in 37 days is the next-term option. This next-term option will, one week later, roll over to a near-term option and, one more week later, drop out of the calculation. Thus, an option can be included in the calculation for up to two weeks. Therefore, the regression is conducted with daily volatilities, but only for one value out of two weeks. As in \textcite{jiang2003}, the values of Wednesday are used, for each second week. \\
+The estimation results for the sample using non-overlapping data are summarized in \ref{tab:overlap1} and \ref{tab:overlap2}.
+
+\input{tables/overlap1.tex}\label{tab:overlap1}
 %
-\input{tables/overlap2.tex}
+\input{tables/overlap2.tex}\label{tab:overlap2}
 %
-\input{tables/overlap3.tex}
-%
-\input{tables/overlap4.tex}
+%\input{tables/overlap3.tex}\label{tab:overlap3}
+
+%\input{tables/overlap4.tex}\label{tab:overlap4}
 
 \subsubsection{IV Regression}
 

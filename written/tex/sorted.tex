@@ -61,3 +61,34 @@ VIX.Close & 4,510 & 0.576 & 5.094 & 1.198 & 0.522 & 2.552 & 9.877\\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
+
+
+The fact that volatility is not directly observable evolves from the fact that one can only observe one realization of the underlying data generating process, and even though stocks are traded and thus have market prices which could be used for volatility measurement, there is no continuous data available and even for high-frequency data and extremely liquid markets microstructure effects and noise prevent getting close to a continuous sample path. It is thus only possible to estimate avearages of discrete volatility for a given period of time. \parencite{andersen2001}.\\
+
+There are however several approaches that should be introduced here. To start with, the definition of the simple gross return is
+\begin{align}\label{eq:return}
+1+ R_{t} = \frac{P_{t}}{P_{t-1}} 
+\end{align}
+In the continuous-time setting, continuously compounded returns are used, which are given by
+\begin{align}\label{eq:log-return}
+r_{t} = ln(1 + R_{t}) = ln (\frac{P_{t}}{P_{t}} + \frac{P_{t-1} - P_{t}}{P_{t}}) = 
+ln \frac{P_{t}}{P_{t-1}} = p_{t} - p_{t-1} \ 
+with\  p_{t} = ln(P_{t})
+\end{align}
+
+%Volatility is the most dominant time-varying distribution characteristic \parencite{andersen2003}.
+%Volatility ``seeks to capture the strength of the (unexpected) return variation over a given period of time'' \parencite[p.7]{andersen2001}
+
+
+ Financial data also show evidence of scaling as described firstly by Mandelbrot, which is connected to the idea that patterns appear in different times, or that the distribution for returns has similar functional forms for various choices of the time interval. \\
+ 
+ \subsection{The Return Process and Stylized Facts of Financial Data}\label{sec:21ReturnProcess}
+ Moreover \citeauthor{andersen2001} mentions that first, even though raw returns have a leptocurtic distribution, the returns standardized by realized volatility are approximately Gaussian. Second, the distribution of realized volatility of returns itself is right skewed, the one of the logarithms of realized volatility however are also approximately Gaussian. Third, the long-run dynamics of realized logarithmic volatilities are well approximated by a fractionally-integrated long-memory process. Other authors who mention stylized facts: \parencite{jiang2003}.
+
+Moreover, even though volatility is not directly observable, it has some properties that are commonly seen. Here the characteristics as presented by \citeauthor{tsay2005} should be introduced. These are firstly volatility clusters, loosely speaking meaning that high volatility tends to be followed by high volatility, and the same is true for low volatility periods. Moreover, volatility jumps are rare. Third, volatility varies within a fixed range and does not diverge to infinity, which statistically means that volatility is often (weakly) stationary. Fourth, there is a leverage effect in volatility, meaning that it reads differently to a big increase in price than to a drop. 
+
+The aim of the HAR-RV model introduced later is to model volatility ex-post and then maybe use this approach to measure the information content of implied volatility and maybe also to build a forecast model. Thus the model needs some measure of latent volatility process, so that the performance can be evaluated. \\
+
+Realized volatility, defined as the square root of the sum of squared high frequency returns can be used to approximate the quadratic variation process which is the variation in a continuous time setting.
+
+\citeauthor{andersen2001} show not only that the realized variance is an \emph{unbiased} estimator of ex-ante expected variance, or at least approximately unbiased when relaxing the zero mean assumption and taking a high sample frequency (their proposition 4). Moreover, \citeauthor{andersen2001} show that the realized variance is a \emph{consistent} nonparametric measure of the notional variance for increasingly finely sampled returns over any fixed length interval (their proposition 5).\\
