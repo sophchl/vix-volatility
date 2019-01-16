@@ -1,12 +1,23 @@
 %!TEX root = ../Main.tex
 
 \appendix
+\section{Figures}
+%
+\begin{figure}[!htbp]\label{fig1}\caption{Figure 1: \ac{SPX} and VIX}
+\includegraphics[width=16cm, height=8cm]{pictures/SPandViX.png}
+\end{figure}
+%
+\begin{figure}[!htbp]\label{fig2}\caption{Figure2: \ac{SPX} and RV and VIX}
+\includegraphics[width=16cm, height=8cm]{pictures/SPandVolandViX.png}
+\end{figure}
+%
+
 \section{Tables}
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Fr, Jan 11, 2019 - 17:33:58
 \begin{table}[!htbp] \centering 
-  \caption{summary statistics} 
+  \caption{summary statistics: variables} 
   \label{tab:summary1} 
 \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
 \\[-1.8ex]\hline 
@@ -46,7 +57,7 @@ Monthly VIX & 3,229 & 0.618 & 2.014 & 1.033 & 0.285 &  1.1 & 0.78\\
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Fr, Jan 11, 2019 - 18:36:21
 \begin{table}[!htbp] \centering 
-  \caption{summary statistics} 
+  \caption{summary statistics: logarithm variables} 
   \label{tab:summary2} 
 \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
 \\[-1.8ex]\hline 
@@ -88,8 +99,8 @@ Monthly VIX & 3,229 & 0.618 & 2.014 & 1.033 & 0.285 & 1.100 & 0.780 \\
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Sa, Jan 12, 2019 - 09:20:14
 \begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
+  \caption{correlation table} 
+  \label{tab: correlation} 
 \begin{tabular}{@{\extracolsep{5pt}} ccccccccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
@@ -110,6 +121,12 @@ Monthly VIX & $0.698$ & $0.926$ & $0.710$ & $0.809$ & $0.931$ & $0.935$ & $0.961
 \restoregeometry
 
 
-\section{Some More Appendix Figures}
+\section{Additional Regression Results and Robustness Checks}
 
+\input{tables/newey1.tex}\label{tab:newey1}
+
+\input{tables/overlap1.tex}\label{tab:overlap1}
+%
+\input{tables/overlap2.tex}\label{tab:overlap2}
+%
 

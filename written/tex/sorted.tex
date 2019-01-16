@@ -92,3 +92,76 @@ The aim of the HAR-RV model introduced later is to model volatility ex-post and 
 Realized volatility, defined as the square root of the sum of squared high frequency returns can be used to approximate the quadratic variation process which is the variation in a continuous time setting.
 
 \citeauthor{andersen2001} show not only that the realized variance is an \emph{unbiased} estimator of ex-ante expected variance, or at least approximately unbiased when relaxing the zero mean assumption and taking a high sample frequency (their proposition 4). Moreover, \citeauthor{andersen2001} show that the realized variance is a \emph{consistent} nonparametric measure of the notional variance for increasingly finely sampled returns over any fixed length interval (their proposition 5).\\
+
+
+Having introduced the concept of notional volatility and it's approximation by realized volatility, we now turn to volatility modelling/measurement. To measure volatility, one can separate between parametric and non-parametric methods. Whereas parametric methods try to measure the expected volatility making different assumptions about both the functional form and the variables in the information set available, non-parametric methods try to quantify notional volatility directly. The realized volatility is an example for a non-parametric methods. However, to estimate volatility ex-ante (and to potentially forecast later), this paper will refer to one type of the parametric methods based on the paper of \textcite{corsi2009} termed the HAR-RV model.\\
+
+In the last paragraph, volatility was measured as the average over discrete time. For the HAR-RV model this concept needs to be transferred to an instantaneous volatility measurement in continuous time. Moving to continuous time, the corresponding logarithmic price process is then given by \textcite{corsi2009} as the following stochastic difference equation,
+
+ For the volatility the difference is, that now the notional variance equals the \emph{integrated variance (IV)}, which is the integral of the stochastic process. For a period of one day, this is represented by
+
+\textcite{corsi2009} then take the square-root of this integrated variance and term it \emph{integrated volatility}. \textcite{andersen2001} show that also in this continuous-time setting the integrated variance equals the notional variance, and thus can also be approximated with the sum of squared returns. This leads to the following notion of realized volatility over the one day interval
+
+\begin{align}\label{eq:ex-post-latent-vola}
+\sigma_{t+1d}^{(d)} = RV_{t+1d}^{(d)} + w_{1+1d}^{(d)}.
+\end{align}
+where the $w_{t}^{(d)}$ now subsumes both the latent volatility measurement and estimation errors.  Taking equations \ref{eq:cascade-model} and \ref{eq:ex-post-latent-vola} together, we obtain the time series representation from the cascade model,
+
+They use a longer time series, take into account the 1987 regime shift and use non-overlapping samples \parencite{jiang2003}.
+
+\textcite{canina1993} for example found that implied volatility does not incorporate the information from historic volatility and constitute poor forecast of future volatility using (\gls{SPX}) options.
+
+\textcite{day1992} examine information content from S\&P 100 options between 1983 and 1989 and find that they have significant information content for realized volatility.
+
+For example \textcite{christensen1998} find that implied volatility subsumes the information content of past volatility and outperforms it in forecasting future volatility. 
+
+Moreover most early paper's implied volatility ignores the early exercise opportunity and/or dividends \parencite{blair2001}
+
+It is however important to note, that all of these procedures depend on the assumptions that are made in the asset pricing model \parencite{andersen2001}.
+
+\subsection{Review of Empirical Results on Measuring the Information Content of Model-Free Implied Volatility}\label{sec:31LiteratureResults}
+
+% PAPERS TESTING THE VIX WITH THE OLD INFORMATION CONTENT%
+Firstly, there are numerious papers testing the informational efficiency of the VIX before 2003, for example \textcite{blair2001}. These papers are however not included in this literature review section, as they do not use the currently applied model-free implied volatility version of the VIX, which was only introduced in 2003. \\
+% PAPERS TESTING MODEL-FREE IMPLIED VOLA %
+
+% PAPERS EXTENDING VIX OR USING IT OTHERWISE %
+Apart from the papers examining informational efficeiency, there are  papers using and extending the implied-volatility approach are for ecample \textcite{hao2013}, who extend the VIX by deriving the VIX formulas under a risk-neutral valuation relationship, finding that this GARCH implied volatility is significantly lower than the VIX thus interpreting that the GARCH model can not capture the variance premium. \\
+
+%\usepackage{glossaries} % abbreviations
+%\setacronymstyle{long-short}  
+%\newacronym{BS}{BS}{Black-and-Scholes-Merton Model}
+%\newacronym{CBOE}{CBOE}{Chicago Board of Options Exchange}
+%\newacronym{SPX}{SPX}{S\&P 500}
+%\makeglossaries
+
+\subsubsection{IV Regression}
+In the following, the results of the IV Regression are displayed.
+
+\input{tables/test1.tex}
+\input{tables/test2.tex}
+
+% So if you looked away to round your eyes, dear
+And I'm building you up
+The illusion of love
+Touch you look obliged
+To a stomp mirror
+These visions of trust
+The ELISION of love
+Tried my best to make you understand me
+Do you lips like even
+When I turn away?
+Try to find a heart where both your hands meet
+'Cause I'm falling deeper
+With each cross I make
+For you I'll trip away
+And your body won't ever fade
+'Cause you are my
+
+%\input{tables/newey3.tex}\label{tab:newey3}
+%
+%\input{tables/newey4.tex}\label{tab:newey3}
+
+%\input{tables/overlap3.tex}\label{tab:overlap3}
+
+%\input{tables/overlap4.tex}\label{tab:overlap4}
