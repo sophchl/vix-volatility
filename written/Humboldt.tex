@@ -2,9 +2,10 @@
 
 \usepackage{mystyle} % mit dieser Zeile werden die Pakete in das Dokument eingelesen, das Dokument mystyle.sty muss dazu im directory vorhanden sein
 
-\newcommand{\Title}{Measuring the information content of VIX volatility in comparison to historic volatility} 
+\newcommand{\Title}{The Information Content of VIX Volatility}
+%in Comparison to Historic Volatility} 
 \newcommand{\Arbeit}{Humboldt Research Project Project}
-\newcommand{\Seminar}{Module 11251 Forschungsprojekt}
+\newcommand{\Seminar}{Modul 11251 Forschungsprojekt}
 \newcommand{\Name}{Sophia Charlotte Gläser}
 \newcommand{\MatrikelNummer}{15202284}
 \newcommand{\Programme} {Corporate Management and Economics}
@@ -15,13 +16,16 @@
 	
 \addbibresource{./bib/bibliography.bib} % das entsprechende File muss ebenfalls im entsprechenden Ordner vorhanden sein
 
-\usepackage{glossaries} % abbreviations
-\setacronymstyle{long-short}  
-\newacronym{BS}{BS}{Black-and-Scholes-Merton Model}
-\newacronym{CBOE}{CBOE}{Chicago Board of Options Exchange}
-\newacronym{SPX}{SPX}{S\&P 500}
 
-\makeglossaries
+\usepackage{acro}
+\DeclareAcronym{BS}{short = BS, long = Black-and-Scholes-Merton Model}
+\DeclareAcronym{CBOE}{short = CBOE, long = Chicago Board of Options Exchange}
+\DeclareAcronym{SPX}{short = SPX, long = S\&P 500}
+\DeclareAcronym{H1}{short = H1, long = Hypothesis 1, class = hypo}
+\DeclareAcronym{H2}{short = H2, long = Hypothesis 2, class = hypo}
+\DeclareAcronym{H3}{short = H3, long = Hypothesis 3, class = hypo}
+\DeclareAcronym{H4}{short = H4, long = Hypothesis 4, class = hypo}
+\DeclareAcronym{VIX}{short = VIX, long = Volatility index}
 
 \begin{document}
 
@@ -33,7 +37,7 @@
 	\tableofcontents
 	\listoftables
 	\listoffigures
-	\printglossaries
+	\printacronyms[exclude-classes=hypo]
 	
 	\newpage
 	
@@ -48,7 +52,7 @@
 
 	\input{./tex/1_Introduction.tex}
 	\input{./tex/2_Motivation.tex} % make this the part about literature concerning volatility measurement
-	\input{./tex/3_Literature-Review.tex} % suggestion Fr.Peter - take this part about literature concerning volatility forecast out
+	%\input{./tex/3_Literature-Review.tex} % suggestion Fr.Peter - take this part about literature concerning volatility forecast out
 	\input{./tex/4_Methodology-and-Data.tex}
 	\input{./tex/5_Results.tex}
 	\input{./tex/6_Discussion.tex}
@@ -60,5 +64,5 @@
 	\printbibliography
 
 
-\include{eidesstattlich.tex}
+\input{./tex/eidesstattlich.tex}
 \end{document}

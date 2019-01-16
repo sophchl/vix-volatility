@@ -28,6 +28,7 @@ top=2.5cm, bottom=2.5cm, footskip = 1.5cm]{geometry}
 \usepackage{multirow} % erlaubt Verschmelzung von Zellen in Tabellen
 \usepackage{booktabs} % erlaubt professionellere Tabellen
 \usepackage{rotating} % erlaubt die Rotation von Tabellen innerhalb einer Seite
+\usepackage[flushleft]{threeparttable} 
 
 % Varia 
 \usepackage[all]{nowidow} % to avoid widows and clubs, see also: http://www.tex.ac.uk/FAQ-widows.html
@@ -35,6 +36,23 @@ top=2.5cm, bottom=2.5cm, footskip = 1.5cm]{geometry}
 \usepackage{footmisc}
 \usepackage{blindtext}
 \usepackage{xcolor} % nice colors
+\usepackage[section]{placeins} % Force floats to stay in the same section
+%
+\makeatletter
+\AtBeginDocument{%
+  \expandafter\renewcommand\expandafter\subsection\expandafter{%
+    \expandafter\@fb@secFB\subsection
+  }%
+}
+\makeatother
+%
+\makeatletter
+\AtBeginDocument{%
+  \expandafter\renewcommand\expandafter\subsubsection\expandafter{%
+    \expandafter\@fb@secFB\subsubsection
+  }%
+}
+\makeatother
 
 
 % Sprachen

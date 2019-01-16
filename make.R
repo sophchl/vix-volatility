@@ -13,6 +13,7 @@ library(sandwich)
 library(lubridate)
 library(lmtest)
 library(stargazer)
+library(car)
 
 library(VIXVolatility)
 
@@ -40,20 +41,20 @@ my_plan <- drake_plan(
   Df_full = na.omit(Df),
 
   # plot data and save plot
-  plot_var = Plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
-  plot_vix = Plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
-  plot_sp_and_vix = Plot_data2(Df_frame, "SPandViX.png"),
-  plot_sp_and_vol_and_vix = Plot_data3(Df_frame, "SPandVolandViX.png"),
-  plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
+  #plot_var = Plot_data1(Df$RealizedVolatility, "Realized Volatility", "vol.png"),
+  #plot_vix = Plot_data1(Df$VIX.Close, "VIX Close", "vix.png"),
+  plot_sp_and_vix = Plot_data2a(Df_frame, "SPandViX.png"),
+  plot_sp_and_vol_and_vix = Plot_data3a(Df_frame, "SPandVolandViX.png"),
+  #plot_vol_and_vix = Plot_data4(Df_frame,"VolandViX.png"),
 
   # descriptive statistics
 
   # regress data and save plot
   Df_regress = RegressionDataRVVIX(Df),
   Df_no_overlap = CreateNonOverlapping(Df_regress),
-  lm1 = Regress_data_neweya(Df_regress, "written/tables/newey1.tex", "written/tables/newey2.tex"),
+  lm1 = Regress_data_newey(Df_regress, "written/tables/newey1.tex", "written/tables/newey2.tex"),
   # lm2 = Regress_data_newey2(Df_regress, "written/tables/newey3.tex", "written/tables/newey4.tex"),
-  lm3 = Regress_data_neweya(Df_no_overlap, "written/tables/overlap1.tex", "written/tables/overlap2.tex")
+  lm3 = Regress_data_newey(Df_no_overlap, "written/tables/overlap1.tex", "written/tables/overlap2.tex")
   # lm4 = Regress_data_newey2(Df_no_overlap, "written/tables/overlap3.tex", "written/tables/overlap4.tex")
 
 )
