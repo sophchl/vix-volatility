@@ -1,9 +1,10 @@
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Di, Jan 15, 2019 - 16:46:43
+% Date and time: Di, Jan 15, 2019 - 16:19:10
 \begin{table}[!htbp] \centering 
+\begin{threeparttable}
   \caption{Logarithmic regression} 
-  \label{} 
+  \label{tab:newey2} 
 \begin{tabular}{@{\extracolsep{5pt}}lccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
@@ -41,4 +42,9 @@ Residual Std. Error & 0.299 (df = 4429) & 0.316 (df = 4431) & 0.288 (df = 4428) 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
+ \begin{tablenotes}
+      \small
+      \item The numbers in the brackets are the standard errors of the parameters computed with Newey-West covariance correction, which are robust to autocorrelated and heteroscedastic error terms, see \textcite{newey1987}.
+    \end{tablenotes}
+  \end{threeparttable}
 \end{table} 

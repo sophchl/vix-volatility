@@ -8,13 +8,13 @@
 #' @export
 #'
 #' @examples
-Regress_data_neweya <- function(Df_regress, SavePath1, SavePath2) {
-  MyRegression1a <- lm(RealizedVolatility ~ day + week + month + crisis, data = Df_regress)
-  MyRegression2a <- lm(RealizedVolatility ~ crisis + VIX.Close %>% lag(1), data = Df_regress)
-  MyRegression3a <- lm(RealizedVolatility ~ day + week + month + crisis + VIX.Close %>% lag(1), data = Df_regress)
-  MyRegression1b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis, data = Df_regress)
-  MyRegression2b <- lm(RealizedVolatility %>% log() ~ crisis + VIX.Close %>% lag(1) %>% log(), data = Df_regress)
-  MyRegression3b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis + VIX.Close  %>% lag(1) %>% log(), data = Df_regress)
+Regress_data_newey <- function(Data, SavePath1, SavePath2) {
+  MyRegression1a <- lm(RealizedVolatility ~ day + week + month + crisis, data = Data)
+  MyRegression2a <- lm(RealizedVolatility ~ crisis + dayVIX, data = Data)
+  MyRegression3a <- lm(RealizedVolatility ~ day + week + month + crisis + dayVIX, data = Data)
+  MyRegression1b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis, data = Data)
+  MyRegression2b <- lm(RealizedVolatility %>% log() ~ crisis + dayVIX %>% log(), data = Data)
+  MyRegression3b <- lm(RealizedVolatility %>% log() ~ day %>% log() + week %>% log() + month %>% log() + crisis + dayVIX %>% log(), data = Data)
   MyNeweyWest1a <- coeftest(MyRegression1a, vcov=NeweyWest(MyRegression1a))
   MyNeweyWest2a <- coeftest(MyRegression2a, vcov=NeweyWest(MyRegression2a))
   MyNeweyWest3a <- coeftest(MyRegression3a, vcov=NeweyWest(MyRegression3a))
@@ -39,8 +39,12 @@ Regress_data_neweya <- function(Df_regress, SavePath1, SavePath2) {
   Robust_se3b <- MyNeweyWest3b[,2]
   Robust_t3b <- MyNeweyWest3b[,3]
   Robust_p3b <- MyNeweyWest3b[,4]
-  stargazer(MyRegression1a, MyRegression2a, MyRegression3a, se = list(Robust_se1a, Robust_se2a, Robust_se3a), t = list(Robust_t1a, Robust_t2a, Robust_t3a), p = list(Robust_p1a, Robust_p2a, Robust_p3a), add.lines=list(c("AIC", round(AIC(MyRegression1a),1), round(AIC(MyRegression2a),1), round(AIC(MyRegression3a),1))), dep.var.labels = c("Realized Volatility"), covariate.labels = c("Intercept", "$RV^{d}_{t}$", "$RV^{w}_{t}$", "$RV^{m}_{t}$", "$crisis$", "$VIX_{t}$"), column.labels = c("Reg1a", "Reg2a", "Reg3a"), omit.stat = "f", intercept.bottom = FALSE, intercept.top = TRUE, title = "level regression", out = SavePath1)
-  stargazer(MyRegression1b, MyRegression2b, MyRegression3b, se = list(Robust_se1b, Robust_se2b, Robust_se3b), t = list(Robust_t1b, Robust_t2b, Robust_t3b), p = list(Robust_p1b, Robust_p2b, Robust_p3b), add.lines=list(c("AIC", round(AIC(MyRegression1b),1), round(AIC(MyRegression2b),1), round(AIC(MyRegression3b),1))), dep.var.labels = c("Realized Volatility"), covariate.labels = c("Intercept", "$ln(RV^{d}_{t})$", "$ln(RV^{w}_{t})$", "$ ln(RV^{m}_{t})$", "$crisis$", "$ln(VIX_{t})$"), column.labels = c("Reg1b", "Reg2b", "Reg3b"), omit.stat = "f", intercept.bottom = FALSE, intercept.top = TRUE, title = "logarithmic regression", out = SavePath2)
+  Hnull1 <- c("day = 0", "week = 0", "month = 0", "dayVIX=1")
+  Hnull2 <- c("day %>% log() = 0", "week %>% log() = 0", "month %>% log()= 0", "dayVIX %>% log() = 1")
+  FtestLinear <- linearHypothesis(MyRegression3a, Hnull1, test = "F")
+  FtestLog <- linearHypothesis(MyRegression3b, Hnull2b, test = "F")
+  stargazer(MyRegression1a, MyRegression2a, MyRegression3a, se = list(Robust_se1a, Robust_se2a, Robust_se3a), t = list(Robust_t1a, Robust_t2a, Robust_t3a), p = list(Robust_p1a, Robust_p2a, Robust_p3a), add.lines=list(c("AIC", round(AIC(MyRegression1a),1), round(AIC(MyRegression2a),1), round(AIC(MyRegression3a),1), "F-test", " ", " ", FtestLinear[2,5](FtestLinear[2,6]))), dep.var.labels = c("Realized Volatility"), covariate.labels = c("Intercept", "$RV^{d}_{t}$", "$RV^{w}_{t}$", "$RV^{m}_{t}$", "$crisis$", "$VIX_{t}$"), column.labels = c("Reg1a", "Reg2a", "Reg3a"), omit.stat = "f", intercept.bottom = FALSE, intercept.top = TRUE, title = "Level regression", out = SavePath1)
+  stargazer(MyRegression1b, MyRegression2b, MyRegression3b, se = list(Robust_se1b, Robust_se2b, Robust_se3b), t = list(Robust_t1b, Robust_t2b, Robust_t3b), p = list(Robust_p1b, Robust_p2b, Robust_p3b), add.lines=list(c("AIC", round(AIC(MyRegression1b),1), round(AIC(MyRegression2b),1), round(AIC(MyRegression3b),1), "F.test", " ", " ", FtestLog[2,5](FtestLog[2,6]))), dep.var.labels = c("Realized Volatility"), covariate.labels = c("Intercept", "$ln(RV^{d}_{t})$", "$ln(RV^{w}_{t})$", "$ ln(RV^{m}_{t})$", "$crisis$", "$ln(VIX_{t})$"), column.labels = c("Reg1b", "Reg2b", "Reg3b"), omit.stat = "f", intercept.bottom = FALSE, intercept.top = TRUE, title = "Logarithmic regression", out = SavePath2)
   Results <- list(MyRegression1a, MyRegression2a, MyRegression3a, MyRegression1b, MyRegression2b, MyRegression3b, MyNeweyWest1a, MyNeweyWest2a, MyNeweyWest3a, MyNeweyWest1b, MyNeweyWest2b, MyNeweyWest3b)
   return(Results)
 }
