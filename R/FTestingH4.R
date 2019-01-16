@@ -16,8 +16,8 @@ Hnull1 <- c("day = 0", "week = 0", "month = 0", "dayVIX=1")
 Hnull2 <- c("day %>% log() = 0", "week %>% log() = 0", "month %>% log()= 0", "dayVIX %>% log() = 1")
 FtestLevel <- linearHypothesis(Modell1, Hnull1, test = "F")
 FtestLog <- linearHypothesis(Modell2, Hnull2, test = "F")
-print(xtable(FtestLevel, type = "latex", caption = c(Caption1)), caption.placement = getOption("xtable.caption.placement", "top"), file = SavePath1)
-print(xtable(FtestLog, type = "latex", caption = c(Caption2)), caption.placement = getOption("xtable.caption.placement", "top"), file = SavePath2)
+print(xtable(FtestLevel, type = "latex", caption = c(Caption1)), caption.placement = getOption("xtable.caption.placement", "top"), table.placement = getOption("xtable.table.placement", "htbp!"), file = SavePath1)
+print(xtable(FtestLog, type = "latex", caption = c(Caption2)), caption.placement = getOption("xtable.caption.placement", "top"), table.placement = getOption("xtable.table.placement", "htbp!"), file = SavePath2)
 }
 
 
