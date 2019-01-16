@@ -35,6 +35,7 @@
 	
 	\pagenumbering{Roman}
 	\tableofcontents
+	\newpage
 	\listoftables
 	\listoffigures
 	\printacronyms[exclude-classes=hypo]
@@ -51,10 +52,13 @@
 
 
 	\input{./tex/1_Introduction.tex}
-	\input{./tex/2_Motivation.tex} % make this the part about literature concerning volatility measurement
-	%\input{./tex/3_Literature-Review.tex} % suggestion Fr.Peter - take this part about literature concerning volatility forecast out
+	\newpage
+	\input{./tex/2_Motivation.tex} 
+	\newpage
 	\input{./tex/4_Methodology-and-Data.tex}
+	\newpage
 	\input{./tex/5_Results.tex}
+	\newpage
 	\input{./tex/6_Discussion.tex}
 	\newpage
 	\input{./tex/7_appendix.tex}
