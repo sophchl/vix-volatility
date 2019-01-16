@@ -11,7 +11,7 @@
 #' @examples
 #' Ftesting(lm1[[3]], lm1[[6]], "written/tables/ftest1.tex", "written/tables/ftest2.tex")
 #'
-FTestingH4 <- function(Modell1, Modell2, Caption1, Caption2, SavePath1, SavePath2) {
+FTesting <- function(Modell1, Modell2, Caption1, Caption2, SavePath1, SavePath2) {
 Hnull1 <- c("day = 0", "week = 0", "month = 0", "dayVIX=1")
 Hnull2 <- c("day %>% log() = 0", "week %>% log() = 0", "month %>% log()= 0", "dayVIX %>% log() = 1")
 FtestLevel <- linearHypothesis(Modell1, Hnull1, test = "F")
