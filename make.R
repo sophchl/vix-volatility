@@ -49,12 +49,12 @@ my_plan <- drake_plan(
   # regress data and save plot
   Df_regress = RegressionDataRVVIX(Df),
   Df_no_overlap = CreateNonOverlapping(Df_regress),
-  lm1 = RegressNewey2(Df_regress, "written/tables/newey1.tex", "written/tables/newey2.tex"),
-  lm2 = RegressNewey2(Df_no_overlap, "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
+  lm1 = RegressNewey2(Df_regress, "newey1", "newey2", "Level regression (whole sample)", "Logarithmic regression (whole sample)", "written/tables/newey1.tex", "written/tables/newey2.tex"),
+  lm2 = RegressNewey2(Df_no_overlap, "overlap1", "overlap2", "Level regression (non-overlapping sample)", "Logarithmimc regression (non-overlapping sample)", "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
 
   # F-tests
-  Ftest1 = FTesting(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
-  Ftest2 = FTesting(lm1[[3]], lm1[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample","written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
+  Ftest1 = FTesting2(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
+  Ftest2 = FTesting(lm2[[3]], lm2[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample","written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
 
 )
 
@@ -63,7 +63,7 @@ vis_drake_graph(drake_config(my_plan))
 
 loadd(c(Df,Df_frame, Df_full))
 loadd(lm1)
-lm1[[2]] %>% summary()
+loadd(lm2)
 
 
 # rm(list = ls())
