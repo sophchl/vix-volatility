@@ -27,6 +27,7 @@
 \DeclareAcronym{H3}{short = H3, long = Hypothesis 3, class = hypo}
 \DeclareAcronym{H4}{short = H4, long = Hypothesis 4, class = hypo}
 \DeclareAcronym{VIX}{short = VIX, long = Volatility index}
+\DeclareAcronym{RV}{short = RV, long = Realized Volatility}
 
 \begin{document}
 
@@ -59,15 +60,17 @@
 	\input{./tex/5_Results.tex}
 	\newpage
 	\input{./tex/6_Discussion.tex}
-	\newpage
-	\input{./tex/7_appendix.tex}
-	\newpage
-	 % die entsprechenden Teile müssen ebenfalls im entsprechenden Ordner vorhanden sein. Jeder Teil muss mit dem Magic Comment %!TEX root = ../Main.tex  beginnen
 
+	 % die entsprechenden Teile müssen ebenfalls im entsprechenden Ordner vorhanden sein. Jeder Teil muss mit dem Magic Comment %!TEX root = ../Main.tex  beginnen
 	\newpage
 	\pagenumbering{Roman}
 	\printbibliography
+	
+	\newpage
+	\input{./tex/7_appendix.tex}
 
 
+	\newpage
+	\thispagestyle{empty}
 \input{./tex/eidesstattlich.tex}
 \end{document}
