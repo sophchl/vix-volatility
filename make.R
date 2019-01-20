@@ -49,8 +49,8 @@ my_plan <- drake_plan(
   # regress data and save plot
   Df_regress = RegressionDataRVVIX(Df),
   Df_no_overlap = CreateNonOverlapping(Df_regress),
-  lm1 = RegressNewey2(Df_regress, "newey1", "newey2", "Level regression (whole sample)", "Logarithmic regression (whole sample)", "written/tables/newey1.tex", "written/tables/newey2.tex"),
-  lm2 = RegressNewey2(Df_no_overlap, "overlap1", "overlap2", "Level regression (non-overlapping sample)", "Logarithmimc regression (non-overlapping sample)", "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
+  lm1 = RegressNewey2(Df_regress, "tab:newey1", "tab:newey2", "Level regression (whole sample)", "Logarithmic regression (whole sample)", "written/tables/newey1.tex", "written/tables/newey2.tex"),
+  lm2 = RegressNewey2(Df_no_overlap, "tab:overlap1", "tab:overlap2", "Level regression (non-overlapping sample)", "Logarithmimc regression (non-overlapping sample)", "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
 
   # F-tests
   Ftest1 = FTesting2(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
