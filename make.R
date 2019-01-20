@@ -54,7 +54,7 @@ my_plan <- drake_plan(
 
   # F-tests
   Ftest1 = FTesting2(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
-  Ftest2 = FTesting(lm2[[3]], lm2[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample","written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
+  Ftest2 = FTesting2(lm2[[3]], lm2[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample","written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
 
 )
 
