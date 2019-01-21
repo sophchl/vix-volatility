@@ -1,18 +1,44 @@
 % A - E
 
-@incollection{andersen2001,
-  title={Parametric and nonparametric volatility measurement},
-  author={Andersen, Torben G. and Bollerslev, Tim and Diebold, Francis X.},
-  booktitle={Handbook of Financial Econometrics: Tools and Techniques},
-  editor = {Yacine Ait-Sahalia and Lars Hansen},
-  publiher = {North Holland},
-  pages={67--137},
-  year={2009},
-  origdate={2002},
-  publisher={Elsevier}
+@article{andersen1998,
+	title = {Answering the Skeptics: Yes, Standard Volatility Models Do Provide Accurate Forecasts},
+	author = {Andersen, Torben G. and Bollerslev, Tim},
+	year = {1998},
+	journal = {International Economic Review},
+	volume = {39},
+	pages = {885--905}
 }
 
-@article{andersen2008,
+@techreport{andersen2001,
+  title={Parametric and Nonparametric Volatility Measurement},
+  author={Andersen, Torben G. and Bollerslev, Tim and Diebold, Francis X.},
+  institution = {NBER Technical Working Paper},
+  number = {279},
+  month = {August},
+  year={2002}
+  %booktitle={Handbook of Financial Econometrics: Tools and Techniques},
+  %editor = {Yacine Ait-Sahalia and Lars Hansen},
+  %publiher = {North Holland},
+  %pages={67--137},
+  %origdate={2002},
+  %publisher={Elsevier}
+}
+
+@article{andersen2003,
+  title={Modeling and Forecasting Realized Volatility},
+  author={Andersen, Torben G. and Bollerslev, Tim and Diebold, Francis X. and Labys, Paul},
+  journal={Econometrica},
+  volume={71},
+  number={2},
+  pages={579--625},
+  month = {March},
+  year={2003},
+  publisher={The Econometric Society},
+  url = {https://www.jstor.org/stable/3082068},
+  note = {accessed 26-09-2018}
+}
+
+%@article{andersen2008,
 author = {Andersen, Torben G. and Bondarenko, Oleg},
 doi = {10.2139/ssrn.1150136},
 isbn = {w13449},
@@ -24,28 +50,9 @@ title = {{Construction and Interpretation of Model-Free Implied Volatility}},
 year = {2008}
 }
 
-@article{andersen2003,
-  title={Modeling and forecasting realized volatility},
-  author={Andersen, Torben G. and Bollerslev, Tim and Diebold, Francis X. and Labys, Paul},
-  journal={Econometrica},
-  volume={71},
-  number={2},
-  pages={579--625},
-  year={2003},
-  publisher={Wiley Online Library}
-}
-
-@article{andersen1998,
-	title = {Answering the Critics: Yes, ARCH Models Do Provide Good Volatility Forecasts},
-	author = {Andersen, Torben G. and Bollerslev, Tim},
-	year = {1998},
-	journal = {International Economic Review},
-	volume = {39},
-	pages = {885--905}
-}
 
 @inproceedings{bakanova2010,
-  title={The information content of implied volatility in the crude oil market},
+  title={The Information Content of Implied Volatility in the Crude Oil Market},
   author={Bakanova, Asyl},
   booktitle={Proceedings of the Brunel conference},
   pages={1--19},
@@ -54,9 +61,9 @@ year = {2008}
 }
 
 @article{black1973,
-  title={The pricing of options and corporate liabilities},
+  title={The Pricing of Options and Corporate Liabilities},
   author={Black, Fischer and Scholes, Myron},
-  journal={Journal of political economy},
+  journal={Journal of Political Economy},
   volume={81},
   number={3},
   pages={637--654},
@@ -65,9 +72,9 @@ year = {2008}
 }
 
 @article{blair2001,
-  title={Modelling S\&P 100 volatility: The information content of stock returns},
+  title={Modelling {S\&P} 100 Volatility: The Information Content of Stock Returns},
   author={Blair, Bevan J. and Poon, Ser-Huang and Taylor, Stephen J.},
-  journal={Journal of banking \& finance},
+  journal={Journal of Banking \& Finance},
   volume={25},
   number={9},
   pages={1665--1679},
@@ -76,7 +83,7 @@ year = {2008}
 }
 
 @article{britten2000,
-  title={Option prices, implied price processes, and stochastic volatility},
+  title={Option Prices, Implied Price Processes, and Stochastic Volatility},
   author={Britten-Jones, Mark and Neuberger, Anthony},
   journal={The Journal of Finance},
   volume={55},
@@ -97,9 +104,56 @@ year = {2008}
   publisher={Oxford University Press}
 }
 
-@article{christensen2002,
+@techreport{exchange2009,
+  title={White Paper {C}boe Volatility Index},
+  author={{Chicago Board of Options Exchange}},
+  institution={Cboe Exchange},
+  pages={1--23},
+  year={2009}
+}
+
+@misc{SandP,
+author = {{Chicago Board of Options Exchange}},
+title = {Historic daily prices},
+year = {2018},
+note = {Data retrieved from \url{ http://www.cboe.com/products/stock-index-options-spx-rut-msci-ftse/s-p-500-index-options/s-p-500-index/spx-historical-data}[accessed November 8, 2018]} 
+}
+
+@misc{CBOE:old,
+author = {{Chicago Board of Options Exchange}},
+title = {{VIX} Data for 1990 - 2003},
+year = {2018},
+note = {Data retrieved from \url{ http://www.cboe.com/products/vix-index-volatility/vix-options-and-futures/vix-index/vix-historical-data}[accessed October 31, 2018]}  
+}
+
+@misc{CBOE:new,
+author = {{Chicago Board of Options Exchange}},
+title = {{VIX} Data for 2004 to present},
+year = {2018},
+note = {Data retrieved from \url{ http://www.cboe.com/products/vix-index-volatility/vix-options-and-futures/vix-index/vix-historical-data}[accessed October 31, 2018]} 
+}
+
+@techreport{christensen2001,
+  title={The telescoping overlap problem in options data},
+  author={Christensen, Bent J. and Hansen, Charlotte S. and Prabhala, Nagpurnanand R.},
+  association = {University of Aarhus and University of Maryland},
+  year={2002}
+}
+
+@article{christensen1998,
+  title={The relation between implied and realized volatility1},
+  author={Christensen, Bent J. and Prabhala, Nagpurnanand R.},
+  journal={Journal of Financial Economics},
+  volume={50},
+  number={2},
+  pages={125--150},
+  year={1998},
+  publisher={Elsevier}
+}
+
+%@article{christensen2002,
   title={New evidence on the implied-realized volatility relation},
-  author={Christensen, Bent Jesper and Hansen, Charlotte Strunk},
+  author={Christensen, Bent J. and Hansen, Charlotte S.},
   journal={The European Journal of Finance},
   volume={8},
   number={2},
@@ -108,78 +162,26 @@ year = {2008}
   publisher={Taylor \& Francis}
 }
 
-@article{christensen2001,
-  title={The telescoping overlap problem in options data},
-  author={Christensen, Bent Jesper and Hansen, Charlotte Strunk and Prabhala, Nagpurnanand R.},
-  journal={Draft Paper},
-  year={2001}
-}
-
-@article{christensen1998,
-  title={The relation between implied and realized volatility1},
-  author={Christensen, Bent J. and Prabhala, Nagpurnanand R.},
-  journal={Journal of financial economics},
-  volume={50},
-  number={2},
-  pages={125--150},
-  year={1998},
-  publisher={Elsevier}
-}
-
 @article{corsi2009,
 author = {Corsi, Fulvio},
 doi = {10.1093/jjfinec/nbp001},
-file = {:C$\backslash$:/Users/Sophia/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Corsi - 2009 - A Simple Approximate Long-Memory Model of Realized Volatility.pdf:pdf},
 journal = {Journal of Financial Econometrics},
 number = {2},
 pages = {174--196},
-title = {{A Simple Approximate Long-Memory Model of Realized Volatility}},
+title = {A Simple Approximate Long-Memory Model of Realized Volatility},
 volume = {7},
 year = {2009}
 }
 
-@techreport{Oxford:RV,
-autor = {Heber, Gerd, Asger Lunde, Neil Shephard and Kevin Sheppard},
-year = {2009},
-title = {Oxford-Man Institute's realized library V0.2},
-publisher = {Oxford-Man Institute, University of Oxford},
-howpublished = "\url{https://realized.oxford-man.ox.ac.uk/data}",
-volume = {Library Version 0.3},
-note = "[Online; accessed 31-October-2018]"
-}
- 
-
-@misc{CBOE:old,
-author = {{Chicago Board of Options Exchange}},
-title = {Vix Data for 1990 - 2003},
-year = {2018},
-howpublished= {\url{ http://www.cboe.com/products/vix-index-volatility/vix-options-and-futures/vix-index/vix-historical-data}} 
-}
-
-@misc{CBOE:new,
-author = {{Chicago Board of Options Exchange}},
-title = {VIX Data for 2004 to present},
-year = {2018},
-howpublished= {\url{ http://www.cboe.com/products/vix-index-volatility/vix-options-and-futures/vix-index/vix-historical-data}} 
-}
-
-@misc{SandP,
-author = {{Chicago Board of Options Exchange}},
-title = {Historic daily prices},
-year = {2018},
-howpublished= {\url{ http://www.cboe.com/products/stock-index-options-spx-rut-msci-ftse/s-p-500-index-options/s-p-500-index/spx-historical-data}} 
-}
-
-@article{day1992,
+%@article{day1992,
 author = {Day, Theodore E. and Lewis, Craig M.},
 doi = {10.1016/0304-4076(92)90073-Z},
-file = {:C$\backslash$:/Users/Sophia/Dropbox/01{\_}Studium/02{\_}Semester/7.{\_}Semester{\_}Fall{\_}18/Humboldt/Literatur/Day Louis - Stock market volatility and the information content of stock index options.pdf:pdf},
 isbn = {0304-4076},
 issn = {03044076},
 journal = {Journal of Econometrics},
 number = {1-2},
 pages = {267--287},
-title = {{Stock market volatility and the information content of stock index options}},
+title = {Stock market volatility and the information content of stock index options},
 volume = {52},
 year = {1992}
 }
@@ -194,9 +196,8 @@ year = {1992}
   year={1994}
 }
 
-@article{diMatteo2007,
+%@article{diMatteo2007,
 doi = {10.1080/14697680600969727},
-file = {:C$\backslash$:/Users/Sophia/Dropbox/01{\_}Studium/02{\_}Semester/7.{\_}Semester{\_}Fall{\_}18/Humboldt/Literatur/RQUF{\_}A{\_}196874{\_}O.pdf:pdf},
 isbn = {1469-7688},
 issn = {14697688},
 journal = {Quantitative Finance},
@@ -210,7 +211,7 @@ year = {2007},
 
 @article{dupire1994,
   title={Pricing with a smile},
-  author={Dupire, Bruno and others},
+  author={Dupire, Bruno},
   journal={Risk},
   volume={7},
   number={1},
@@ -221,7 +222,7 @@ year = {2007},
 @article{dupire1997,
   title={Pricing and hedging with smiles},
   author={Dupire, Bruno},
-  journal={Mathematics of derivative securities},
+  journal={Mathematics of Derivative Securities},
   volume={1},
   number={1},
   pages={103--111},
@@ -229,7 +230,7 @@ year = {2007},
   publisher={Cambridge University Press Cambridge, UK}
 }
 
-@article{engle2012a,
+%@article{engle2012a,
 author = {Engle, Robert F and Sokalska, Magdalena E},
 doi = {10.1093/jjfinec/nbr005},
 journal = {JournalofFinancialEconom etrics},
@@ -240,26 +241,9 @@ volume = {10},
 year = {2012}
 }
 
-@techreport{exchange2009,
-  title={White Paper Cboe Volatility Index},
-  author={{Chicago Board of Options Exchange}},
-  institution={Cboe Exchange},
-  pages={1--23},
-  year={2009}
-}
+
 
 % F - J
-
-@article{fama1970,
-  title={Efficient capital markets: A review of theory and empirical work},
-  author={Malkiel, Burton G and Fama, Eugene F},
-  journal={The journal of Finance},
-  volume={25},
-  number={2},
-  pages={383--417},
-  year={1970},
-  publisher={Wiley Online Library}
-}
 
 @article{fleming1995,
   title={Predicting stock market volatility: A new measure},
@@ -272,22 +256,7 @@ year = {2012}
   publisher={Wiley Online Library}
 }
 
-@article{furfine1999,
-author = {Furfine, Craig},
-doi = {10.2139/ssrn.169089},
-file = {:C$\backslash$:/Users/Sophia/Dropbox/01{\_}Studium/02{\_}Semester/7.{\_}Semester{\_}Fall{\_}18/Humboldt/Literatur/Furfine{\_}Interbank Exposures - Quantifying the Risk of Contagion.pdf:pdf},
-isbn = {0022-2879 ER},
-issn = {1538-4616},
-journal = {Ssrn},
-keywords = {G21},
-number = {1},
-pages = {111--128},
-title = {{Interbank Exposures: Quantifying the Risk of Contagion}},
-volume = {35},
-year = {1999}
-}
-
-@article{harvey1992,
+%@article{harvey1992,
   title={Market volatility prediction and the efficiency of the S\&P 100 index option market},
   author={Harvey, Campbell R and Whaley, Robert E},
   journal={Journal of Financial Economics},
@@ -298,7 +267,7 @@ year = {1999}
 }
 
 
-@misc{hull2006,
+%@misc{hull2006,
   title={Options, futures, and other derivatives},
   author={John, C and others},
   year={2006},
@@ -306,20 +275,26 @@ year = {1999}
 }
 
 @article{jiang2003,
-author = {{Jiang, George J {\&} Tian}, Yisong S.},
+author = {Jiang, George J. and Yisong, Tian S.},
+title = {Model-Free Implied Volatility and Its Information Content},
 doi = {10.1093/rfs/hhi027},
-file = {:C$\backslash$:/Users/Sophia/Dropbox/01{\_}Studium/02{\_}Semester/7.{\_}Semester{\_}Fall{\_}18/Humboldt/Literatur/Jiang, Tian{\_}Model Free Implied Volatility and its information content.pdf:pdf},
-isbn = {5206213373},
-issn = {0893-9454},
 journal = {The Review of Financial Studies},
 number = {4},
-title = {{Model-Free Implied Volatility and Its Information Content}},
 volume = {18},
-year = {2003},
+year = {2005},
 publisher={Oxford University Press}
 }
 
-@article{jorion1995,
+@article{jiang2007,
+  title={Extracting model-free volatility from option prices: An examination of the VIX index},
+  author={Jiang, George J. and Tian, Yisong S.},
+  year={2007},
+  journal = {Journal of Derivatives},
+  volume = {14},
+  number = {3},
+}
+
+%@article{jorion1995,
   title={Predicting volatility in the foreign exchange market},
   author={Jorion, Philippe},
   journal={The Journal of Finance},
@@ -332,7 +307,7 @@ publisher={Oxford University Press}
 
 % K  - O
 
-@article{kambouroudis2015,
+%@article{kambouroudis2015,
 author = {Kambouroudis, Dimos and Mcmillan, David and Tsakou, Katerina},
 doi = {10.1002/fut.21783},
 file = {::},
@@ -340,7 +315,7 @@ title = {{Forecasting stock return volatility: a comparison of GARCH, implied vo
 year = {2015}
 }
 
-@article{lamoureux1993,
+%@article{lamoureux1993,
   title={Forecasting stock-return variance: Toward an understanding of stochastic implied volatilities},
   author={Lamoureux, Christopher G and Lastrapes, William D},
   journal={The Review of Financial Studies},
@@ -351,42 +326,59 @@ year = {2015}
   publisher={Oxford University Press}
 }
 
+@article{fama1970,
+  title={Efficient capital markets: A review of theory and empirical work},
+  author={Malkiel, Burton G. and Fama, Eugene F.},
+  journal={The Journal of Finance},
+  volume={25},
+  number={2},
+  pages={383--417},
+  year={1970},
+  publisher={Wiley Online Library}
+}
+
 @article{mandelbrot1963,
   title={The variation of certain speculative prices},
-  author={Mandelbrot, Benoit B},
+  author={Mandelbrot, Benoit B.},
   journal={The Journal of Business},
   pages={394--419},
   year={1963},
   volume={36}
 }
 
-
-@article{mueller1993,
+@conference{mueller1993,
   title={Fractals and intrinsic time: A challenge to econometricians},
   author={M{\"u}ller, Ulrich A and Dacorogna, Michel M and Dav{\'e}, Rakhal D and Pictet, Olivier V and Olsen, Richard B and Ward, J Robert},
-  journal={Unpublished manuscript, Olsen \& Associates, Z{\"u}rich},
-  year={1993}
+  year={1993},
+  organization  = {Applied Econometrics Asociation}
 }
 
 @article{newey1987,
   title={Hypothesis testing with efficient method of moments estimation},
-  author={Newey, Whitney K and West, Kenneth D},
+  author={Newey, Whitney K. and West, Kenneth D.},
   journal={International Economic Review},
   pages={777--787},
   year={1987},
   publisher={JSTOR}
 }
 
+@misc{Oxford:RV,
+autor = {Heber, Gerd, Asger Lunde, Neil Shephard and Kevin Sheppard},
+year = {2009},
+title = {Oxford-Man Institute's realized library V0.2},
+note = {Data retrieved from \url{https://realized.oxford-man.ox.ac.uk/data}[accessed October 13,2018]},
+publisher = {Oxford-Man Institute, University of Oxford}
+}
+
 % P - Z
 
 @article{poon2003,
 author = {Poon, Ser-huang and Granger, Clive W.J.},
-file = {:C$\backslash$:/Users/Sophia/Dropbox/01{\_}Studium/02{\_}Semester/7.{\_}Semester{\_}Fall{\_}18/Humboldt/Literatur/PoonGranger(2003).pdf:pdf},
+title = {Forecasting volatility in financial markets: A review},
 journal = {Journal of Economic Literature},
-number = {June},
+volume= {41},
+number = {2},
 pages = {478--539},
-title = {{Forecasting volatility in financial markets : A review}},
-volume = {41},
 year = {2003}
 }
 
@@ -413,19 +405,20 @@ year = {2003}
 }
 
 @book{tsay2005,
-  title={Analysis of financial time series},
+  title={Analysis of Financial Time Series},
   author={Tsay, Ruey S},
   volume={543},
   year={2005},
   publisher={John Wiley \& Sons}
 }
 
-@misc{whaley2008,
+@techreport{whaley2008,
   title={Understanding VIX},
   author={Whaley, Robert E},
   year={2008},
+  institution = {The Owen Graduate School of Management, Vanderbilt University},
   url = {https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1296743},
-  note = {accessed 14.01.2019}
+  note = {[accessed October 14, 2018]}
 }
 
 @article{whaley1995,
