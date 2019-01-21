@@ -17,7 +17,7 @@ Plot_data2a <- function(infile, save_name){
     scale_color_manual(values = c("#00AFBB", "#E7B800")) +
     labs(y = "VIX (Close)", x = "Year", color = "Legend") +
     theme(legend.position = c(0.8,0.9), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-          text = element_text(size = 15), axis.text = element_text(size = 15), rect = element_rect(fill = "transparent"))
+          text = element_text(size = 25), axis.text = element_text(size = 25), rect = element_rect(fill = "transparent"))
   ggsave(save_name, plot = last_plot(), width = 16, path = "written/pictures")
 }
 

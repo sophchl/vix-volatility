@@ -53,8 +53,8 @@ my_plan <- drake_plan(
   lm2 = RegressNewey2(Df_no_overlap, "tab:overlap1", "tab:overlap2", "Level regression (non-overlapping sample)", "Logarithmimc regression (non-overlapping sample)", "written/tables/overlap1.tex", "written/tables/overlap2.tex"),
 
   # F-tests
-  Ftest1 = FTesting2(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
-  Ftest2 = FTesting2(lm2[[3]], lm2[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample","written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
+  Ftest1 = FTesting(lm1[[3]], lm1[[6]], "F-test Reg3a", "F-test Reg3b", "tab:ftest1", "tab:ftest2", "written/tables/ftest1.tex", "written/tables/ftest2.tex"),
+  Ftest2 = FTesting(lm2[[3]], lm2[[6]], "F-test Reg3a non-overlapping sample", "F-test Reg3b non-overlapping sample", "tab:ftest1over","tab:ftest2over", "written/tables/ftestOverlap1.tex", "written/tables/ftestOverlap2.tex")
 
 )
 
