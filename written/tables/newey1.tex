@@ -2,6 +2,7 @@
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: So, Jan 20, 2019 - 01:19:25
 \begin{table}[!htbp] \centering 
+\begin{threeparttable}
   \caption{Level regression (whole sample)} 
   \label{tab:newey1} 
 \begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -41,4 +42,9 @@ Residual Std. Error & 0.332 (df = 4429) & 0.343 (df = 4431) & 0.319 (df = 4428) 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
+\begin{tablenotes}
+\small
+\item  The numbers in the brackets are the standard errors of the parameters computed with Newey-West covariance correction, which are robust to autocorrelated and heteroscedastic error terms, see \textcite{newey1987}.
+\end{tablenotes}
+\end{threeparttable}
 \end{table} 

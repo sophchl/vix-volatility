@@ -33,16 +33,17 @@ The correlation matrix for the realized volatility, its lagged specifications an
 Consistent with prior research, for example \textcite{jiang2003}, \textcite{canina1993} or \textcite{christensen1998}, both univariate and encompassing regression analysis is used to analyse the information content of the volatility measures. Additionally the approach from the HAR-RV model, described by \textcite{corsi2009} is integrated and not only one day lagged realized volatility is used as an explanatory variable in the regression, but also weekly and monthly realized volatility.\\
 In the univariate regression, the realized volatility is regressed once solely on the historic data, and once only on the \ac{VIX}. For comparison, realized volatility is regressed on both historic data and the \ac{VIX} in the encompassing regression analysis. Thus the encompassing regression analysis gives information about the relative importance of the volatility measures, and whether the \ac{VIX} subsumes the information from the historic volatility \parencite{jiang2003}. For each explanatory variable, the value of the current day $t$ is used, whereas for the explained variable, the one-day ahead value $t+1d$ is used. Like this, all the information available on day $t$ is used to evaluate the one-day ahead realized volatility. The three regressions are then given by
 \begin{align}
-RV_{t+1d} = \ &c + \beta^{RV,d}_{t} RV^{(d)}_{t} + \beta^{RV,w}_{t} RV^{(w)}_{t} + \beta^{RV,m}_{t} RV^{(m)}_{t} + \beta^{crisis} crisis \tag{Reg1a}  \label{eq:Reg1a}\\
-RV_{t+1d} = \ &c + \beta^{VIX}_{t} VIX_{t} + \beta^{crisis} crisis  \tag{Reg2a}  \label{eq:Reg2a}\\
-RV_{t+1d} = \ &c + \beta^{RV,d}_{t} RV^{(d)}_{t} + \beta^{RV,w}_{t} RV^{(w)}_{t} + \beta^{RV,m}_{t} RV^{(m)}_{t} + \beta^{VIX}_{t} VIX_{t}  \nonumber \\
-& + \beta^{crisis} crisis  \tag{Reg3a}  \label{eq:Reg3a}
+RV_{t+1d} = \ &c + \beta^{RV,d}_{t} RV^{(d)}_{t} + \beta^{RV,w}_{t} RV^{(w)}_{t} + \beta^{RV,m}_{t} RV^{(m)}_{t} \nonumber \\
+&+ \beta^{crisis} crisis \tag{Reg1a}  \label{eq:Reg1a}\\[1em]
+RV_{t+1d} = \ &c + \beta^{VIX}_{t} VIX_{t} + \beta^{crisis} crisis  \tag{Reg2a}  \label{eq:Reg2a}\\[1em]
+RV_{t+1d} = \ &c + \beta^{RV,d}_{t} RV^{(d)}_{t} + \beta^{RV,w}_{t} RV^{(w)}_{t} + \beta^{RV,m}_{t} RV^{(m)}_{t} \nonumber \\
+&+ \beta^{VIX}_{t} VIX_{t} + \beta^{crisis} crisis  \tag{Reg3a}  \label{eq:Reg3a}
 \end{align}
 with $RV_{t+1d}$ the realized volatility one-day-ahead, $RV^{(d)}_{t}$ the daily realized volatility, $RV^{(w)}_{t}$ the weekly realized volatility, $RV^{(m)}_{t}$ the monthly realized volatility, $VIX$ the \ac{VIX} closing value and $crisis$ the dummy variable, indicating one in the time of the financial crisis (2008-2012) and zero otherwise. The same regressions are specified with the logarithm for each variable,
 \begin{align}
 \ln(RV_{t+1d}) = \ &c + \beta^{RV,d}_{t} \ln(RV^{(d)}_{t}) + \beta^{RV,w}_{t} \ln(RV^{(w)}_{t}) \nonumber \\
-& + \beta^{RV,m}_{t} \ln(RV^{(m)}_{t}) + \beta^{crisis} crisis  \tag{Reg1b}  \label{eq:Reg1b}\\
-ln(RV_{t+1d}) =  \ &c + \beta^{VIX}_{t} ln(VIX_{t}) + \beta^{crisis} crisis  \tag{Reg2b}  \label{eq:Reg2b}\\
+& + \beta^{RV,m}_{t} \ln(RV^{(m)}_{t}) + \beta^{crisis} crisis  \tag{Reg1b}  \label{eq:Reg1b}\\[1em]
+ln(RV_{t+1d}) =  \ &c + \beta^{VIX}_{t} ln(VIX_{t}) + \beta^{crisis} crisis  \tag{Reg2b}  \label{eq:Reg2b}\\[1em]
 ln(RV_{t+1d}) = \ &c + \beta^{RV,d}_{t} ln(RV^{(d)}_{t}) + \beta^{RV,w}_{t} ln(RV^{(w)}_{t}) + \beta^{RV,m}_{t} ln(RV^{(m)}_{t}) \nonumber \\
 & + \beta^{VIX}_{t} ln(VIX_{t})+ \beta^{crisis} crisis.  \tag{Reg3b}  \label{eq:Reg3b}
 \end{align}
@@ -58,9 +59,11 @@ The regressions will be examined with the following research questions :\\
 The research questions are approached in the following way:\\
 Concerning \textbf{Q1}, if the \ac{VIX} contains information about future volatility, we would expect the slope estimate of the VIX in \ref{eq:Reg2a} and \ref{eq:Reg2b} to be significantly different from zero. This can be formalized as a testable hypothesis, with $H_{0}: \beta^{VIX} = 0$, using t-tests. For \textbf{Q2}, adjusted $R^{2}$ should be compared in the univariate regressions (\ref{eq:Reg1a} to \ref{eq:Reg2a} and \ref{eq:Reg1b} to \ref{eq:Reg2b}). If the \ac{VIX} can explain more variation of the one-day-ahead realized volatility than the historic volatilities, the $R^{2}$ and adjusted $R^{2}$ should be larger in the second regression\footnote{For this paper the adjusted $R^{2}$ is preferred to the normal $R^{2}$, as it adds a penalty for adding additional independent variables, which could be misleading here because the first specification has more explanatory variables than the second one.}. For \textbf{Q3}, adjusted $R^{2}$ should be compared in the univariate regression with the VIX and the regression containing all variables (\ref{eq:Reg2a} to \ref{eq:Reg3a} and \ref{eq:Reg2b} to \ref{eq:Reg3b}). If the \ac{VIX} adds explanatory value additional to the historic volatilities, the (adjusted) $R^{2}$ should increase in the third specification. Finally, for \textbf{Q4}, if the VIX subsumes the information content contained in the historic volatilities, we would expect the slope estimates for the historic volatilities to become not significantly different from zero, when the VIX is added, whereas the VIX should still be significant (\ref{eq:Reg3a} and \ref{eq:Reg3b}). This can be formalized as a testable hypothesis with the $H_{0}: \beta^{d} = \beta^{w} = \beta^{m} = 0 \ and \ \beta^{VIX} = 1$, using F-tests.
 
+\newpage
 \subsection{Limitations}\label{sec:43Limits}
-As volatility is stochastic, the ex-ante estimation will not equal the return volatility, as it is a measurement over an aggregated discrete time period \parencite{andersen2001}.
-The VIX might be flawed, as \textcite{jiang2007} showed.
-There might be a bias in estimated realized volatility due to autocorrelation in intraday returns \parencite{jiang2003}. 
+This section will briefly present some limitations of the methodology applied, which is supposed to allow the reader to better understand the results.\\
+As described multiple times, volatility can not directly be observed, even though the \ac{VIX} is now being increasingly traded, making volatility the directly traded asset. Consequently, the realized volatility used in this paper is a measurement over an aggregated period of discrete time. The approach used for realized volatility is shown to be a consistent nonparametric measure of notional volatility by \textcite{andersen2001}, nevertheless also the notional volatility is only the volatility of a fixed time interval, thus it can not be interpreted as an instantaneous volatility measure.\\
+The VIX was taken as it is calculated by \ac{CBOE}, as the aim of this paper is not to improve any model-free implied volatility calculation, but to examine its information content. Such an improvement of the \ac{VIX} calculation is done by \textcite{jiang2007}, as they state that the VIX significantly underestimates true volatility.\\
+Considering the measurement, the methodology used aims at examining the information content and is an in-sample forecast, thus it can not be used directly for predicting unknown realized volatility.
 
 %  as serial correlation causes both the Gauss-Markow and Classical linear model assumptions to fail. 
