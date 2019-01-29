@@ -41,10 +41,11 @@ my_plan <- drake_plan(
   Df_full = na.omit(Df),
 
   # plot data and save plot
-  plot_sp_and_vix = Plot_data2a(Df_frame, "SPandViX.png"),
-  plot_sp_and_vol_and_vix = Plot_data3a(Df_frame, "SPandVolandViX.png"),
+  plot_sp_and_vix = Plot_data2(Df_frame, "SPandViX.png"),
+  plot_sp_and_vol_and_vix = Plot_data3(Df_frame, "SPandVolandViX.png"),
 
   # descriptive statistics
+  # not inlcuded in drake
 
   # regress data and save plot
   Df_regress = RegressionDataRVVIX(Df),
@@ -60,13 +61,6 @@ my_plan <- drake_plan(
 
 make(my_plan)
 vis_drake_graph(drake_config(my_plan))
-
-loadd(c(Df,Df_frame, Df_full))
-loadd(lm1)
-loadd(lm2)
-
-
-# rm(list = ls())
 
 ## Merkzettel --------------------------------
 # file_in - Wenn ich Sachen von außerhalb der R umgebung einlese, file_out: wenn ich Sachen abspeichere

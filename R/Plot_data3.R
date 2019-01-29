@@ -8,7 +8,7 @@
 #' @examples
 #' plot_data3(Df_frame)
 #'
-Plot_data3a <- function(infile, save_name){
+Plot_data3 <- function(infile, save_name){
   plot <- ggplot(infile, aes(x = Date)) +
     geom_line(aes(y = RealizedVolatility, color = "Realized Volatility"), size = 1) + # RV in green
     geom_line(aes(y = VIX.Close,  color = "VIX (Close)"), size  = 1) +  ## vix in orange
