@@ -1,4 +1,3 @@
-R code for university project
+R code for university project, comparing the information content of model-free and Black-and-Scholes implied volatility.
 
-dowload the files run the R main for the code
-if it does not work, every function has to be run first 
+Run: Dowload all files and run R main. If it does not work, every function has to be run first.
